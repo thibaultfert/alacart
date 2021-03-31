@@ -25,7 +25,7 @@
             <p>{{ product.volume }}L</p>
             <p>{{ product.price }}EUR</p>
 
-            <a href="{{ path('main_show') }}" class="btn btn-primary">Lire la suite</a>
+            <a href="{{ path('show_one_drink', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-primary">Plus d'infos</a>
         </div>
     </article>
     {% endfor %}

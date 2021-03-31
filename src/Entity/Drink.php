@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DrinkRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=DrinkRepository::class)
@@ -19,26 +20,32 @@ class Drink
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=6, max=255)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=500)
+     * @Assert\Length(min=10, max=255)
+     * @Assert\Regex("/.jpg$/")
      */
     private $images;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=3, max=255)
      */
     private $region;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max=1000)
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Type("float")
      */
     private $volume;
 
@@ -49,6 +56,7 @@ class Drink
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=6, max=50)
      */
     private $type;
 

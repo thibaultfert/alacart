@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        {% if editMode %}
+            Modification d'un produit
+        {% else %}
+            Création d'un produit
+        {% endif %}
+    </h1>
+
+    {{ form_start(formDrink) }} {# balise ouvrante du form avec ses options #}
+
+    {{ form_row(formDrink.name, {'attr' :{'class': "form-control"}}) }}
+    {{ form_row(formDrink.images, {'attr' :{'class': "form-control"}}) }}
+    {{ form_row(formDrink.region, {'attr' :{'class': "form-control"}}) }}
+    {{ form_row(formDrink.description, {'attr' :{'class': "form-control"}}) }}
+    {{ form_row(formDrink.volume, {'attr' :{'class': "form-control"}}) }}
+    {{ form_row(formDrink.price, {'attr' :{'class': "form-control"}}) }}
+    {{ form_row(formDrink.type, {'attr' :{'class': "form-control"}}) }}
+    <br/>
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer
+        {% else %}
+            Ajouter le produit
+        {% endif %}
+    </button>
+
+    {{ form_end(formDrink) }} {# balise fermante précédée de toute les champs présent dans le form et non appelé (comportement par défaut) #}
+
+{% endblock %}
