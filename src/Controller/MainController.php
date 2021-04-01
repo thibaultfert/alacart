@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Drink;
+use App\Form\DrinkType;
+use App\Repository\DrinkRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Drink;
-use App\Repository\DrinkRepository;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use App\Form\DrinkType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class MainController extends AbstractController
 {
@@ -23,8 +24,8 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/create_drink", name="create_drink")
-     * @Route("/{id}/edit_drink", name="edit_drink") 
+     * @Route("/drink/create_drink", name="create_drink")
+     * @Route("/drink/{id}/edit_drink", name="edit_drink") 
      */
     // Si c'est la 1ere route qui nous amène ici, l'objet $drink sera null d'où la mention dans les param de la fct
     // Si c'est la 2eme route, grâce à l'id en paramètre, 
@@ -60,7 +61,7 @@ class MainController extends AbstractController
     }
  
     /**
-     * @Route("/{type}", name="drink")
+     * @Route("/drink/{type}", name="drink")
      */
     public function drink($type, DrinkRepository $repo): Response
     {
@@ -73,7 +74,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/{type}/{id}", name="show_one_drink")
+     * @Route("/drink/{type}/{id}", name="show_one_drink")
      */
     public function show($id, DrinkRepository $repo)
     {

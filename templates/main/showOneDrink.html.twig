@@ -4,11 +4,28 @@
     <article>
             <h2>{{ drink.name }}</h2>
             <div class="content">
-                <img src="{{ drink.images }}" alt="">
+                <div height="200" width="100"><img src="{{ drink.images }}" alt="" height="100%"></div>
                 <p>{{ drink.region }}</p>
                 <p>{{ drink.description }}</p>
                 <p>{{ drink.volume }}L</p>
                 <p>{{ drink.price }}EUR</p>
             </div>
     </article>
+
+    <section id="commentaires">
+        {% for drinkComment in drink.drinkComments %}
+            <div class="comment">
+                <div class="row">
+                    <div class="col-3">
+                        {{ drinkComment.author }} (<small>{{ drinkComment.createdAt | date ('d/m/Y à H:i') }}</small>)
+                    </div> 
+                    <div class="col-9">
+                        {{ drinkComment.content | raw }} {# raw permet de prendre en compte les <br/> du content #}
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        
+    </section>
 {% endblock %}

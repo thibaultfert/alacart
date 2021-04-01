@@ -34,6 +34,8 @@ class DrinkType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Drink::class,
+            'attr' => ['novalidate' => 'novalidate', // comment me to reactivate HTML5 validation
+            ] 
         ]);
     }
 }

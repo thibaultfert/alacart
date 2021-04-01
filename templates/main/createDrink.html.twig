@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme formDrink 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 
     <h1>
@@ -12,13 +14,13 @@
 
     {{ form_start(formDrink) }} {# balise ouvrante du form avec ses options #}
 
-    {{ form_row(formDrink.name, {'attr' :{'class': "form-control"}}) }}
-    {{ form_row(formDrink.images, {'attr' :{'class': "form-control"}}) }}
-    {{ form_row(formDrink.region, {'attr' :{'class': "form-control"}}) }}
-    {{ form_row(formDrink.description, {'attr' :{'class': "form-control"}}) }}
-    {{ form_row(formDrink.volume, {'attr' :{'class': "form-control"}}) }}
-    {{ form_row(formDrink.price, {'attr' :{'class': "form-control"}}) }}
-    {{ form_row(formDrink.type, {'attr' :{'class': "form-control"}}) }}
+    {{ form_row(formDrink.name, {'label': 'Nom'}) }}
+    {{ form_row(formDrink.images, {'label': 'Images'}) }}
+    {{ form_row(formDrink.region, {'label': 'Région'}) }}
+    {{ form_row(formDrink.description, {'label': 'Description'}) }}
+    {{ form_row(formDrink.volume, {'label': 'Volume'}) }}
+    {{ form_row(formDrink.price, {'label': 'Prix'}) }}
+    {{ form_row(formDrink.type, {'label': 'Type'}) }}
     <br/>
     <button type="submit" class="btn btn-success">
         {% if editMode %}
