@@ -2,14 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *  fields = {"email"},
+ *  message = "L'email que vous avez saisi existe déjà"
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -118,5 +124,21 @@ class User
         $this->confirm_password = $confirm_password;
 
         return $this;
+    }
+
+    // fonctions à déclarer car demandées par l'interface UserInterface
+    public function eraseCredentials() {}
+
+    public function getUsername() {
+        return $this->userLastName; // Même si on se sert déjà de getUserFirstName et getUserLastName
+                                    // Il faut que le composant Security accède à une donnée 'username'
+                                    // ici la plus cohérente serait notre attribut userLastName donc on lui fournit
+    } 
+
+    
+    public function getSalt() {}
+
+    public function getRoles() {
+        return ['ROLE_USER'];
     }
 }

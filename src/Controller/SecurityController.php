@@ -9,13 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/registration", name="security_registration")
      */
-    public function registration(Request $request, EntityManagerInterface $manager) {
+    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
 
         $user = new User();
 
@@ -24,8 +25,15 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+
+            $user->setPassword($hash);
+
             $manager->persist($user);
             $manager->flush();
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('security/registration.html.twig', [
@@ -33,4 +41,17 @@ class SecurityController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/login", name="security_login")
+     */
+    public function login() {
+        
+        return $this->render('security/login.html.twig');
+    }
+
+    /**
+     * @Route("/logout", name="security_logout")
+     */
+    public function logout() {}
 }

@@ -13,6 +13,7 @@
     </article>
 
     <section id="commentaires">
+        <h1>Commentaires</h1>
         {% for drinkComment in drink.drinkComments %}
             <div class="comment">
                 <div class="row">
@@ -26,6 +27,19 @@
             </div>
             <hr>
         {% endfor %}
-        
+
+        {% if app.user %}
+        <h1>Ajouter un commentaire</h1>
+        {{ form_start(drinkCommentForm) }}
+        {{ form_row(drinkCommentForm.author, {'label': 'Auteur', 'attr': {'palceholder': 'Votre nom'}})}}
+        {{ form_row(drinkCommentForm.content, {'label': 'Commentaire', 'attr': {'palceholder': 'Votre commentaire'}})}}
+        <button class="btn btn-success">Envoyer</button>
+        {{ form_end(drinkCommentForm) }}
+
+        {% else %}
+        <h4>Pour laisser un commentaire, merci de vous connecter</h4>
+        <a href="{{ path('security_login') }}"><button class="btn btn-secondary">Se connecter</button></a>
+        {% endif %}
+
     </section>
 {% endblock %}
