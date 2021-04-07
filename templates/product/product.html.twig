@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if type == 'red_wine' %}
+        Vins Rouges
+    {% elseif type == 'white_wine' %}
+        Vins Blancs
+    {% elseif type == 'rose_wine' %}
+        Vins Rosés
+    {% elseif type == 'champagne' %}
+        Champagnes & Bulles
+    {% else %}
+        Vins & Gourmandises
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% for product in products %}
+    <article>
+        <h2>{{ product.name }}</h2>
+        <div class="content">
+            <div class="row">
+                <div class="col-3">
+                    <div height="200px"><img class="img-fluid" src="{{ asset('images/test.jpg') }}" alt="" height="100%"></div>
+                </div>
+                <div class="col">
+                    <p>{{ product.region }}</p>
+                    <p>{{ product.volume }}L</p>
+                    <p>{{ product.price }}EUR</p>
+
+                    <a href="{{ path('show_one_product', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-primary">Plus d'infos</a>
+                </div>
+            </div>
+        </div>
+    </article>
+    <hr>
+    {% endfor %}
+{% endblock %}

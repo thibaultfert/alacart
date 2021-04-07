@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Drink;
-use App\Entity\DrinkComment;
-use App\Form\DrinkType;
-use App\Form\DrinkCommentType;
-use App\Repository\DrinkRepository;
+use App\Entity\Product;
+use App\Entity\ProductComment;
+use App\Form\ProductType;
+use App\Form\ProductCommentType;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,84 +17,84 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/product/drink/create_drink", name="create_drink")
-     * @Route("/product/drink/{id}/edit_drink", name="edit_drink") 
+     * @Route("/product/create_product", name="create_product")
+     * @Route("/product/{id}/edit_product", name="edit_product") 
      */
-    // Si c'est la 1ere route qui nous amène ici, l'objet $drink sera null d'où la mention dans les param de la fct
+    // Si c'est la 1ere route qui nous amène ici, l'objet $product sera null d'où la mention dans les param de la fct
     // Si c'est la 2eme route, grâce à l'id en paramètre, 
-    // le parmaterConverter de symfony choisira par défaut l'objet $drink d'après cet id
-    public function formDrink(Drink $drink = null, Request $request, EntityManagerInterface $manager)
+    // le parmaterConverter de symfony choisira par défaut l'objet $product d'après cet id
+    public function formProduct(Product $product = null, Request $request, EntityManagerInterface $manager)
     {
-        // Si l'objet $drink est null (arrivée par 1ere route)
-        if(!$drink) {
-            $drink = new Drink();
+        // Si l'objet $product est null (arrivée par 1ere route)
+        if(!$product) {
+            $product = new Product();
         }
 
-        //formulaire de type DrinkType (type crée grace à "php bin/console make:form")
-        $form = $this->createForm(DrinkType::class, $drink);
+        //formulaire de type ProductType (type crée grace à "php bin/console make:form")
+        $form = $this->createForm(ProductType::class, $product);
 
         $form->handleRequest($request); // L'objet form dispose d'un gestionnaire de requete
                                         // Analyse si soumis ou pas, si les champs sont remplis etc... 
-                                        // Puis bind l'ensemble des champs dans l'objet associé (ici drink)
+                                        // Puis bind l'ensemble des champs dans l'objet associé (ici product)
         
         if($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($drink);
+            $manager->persist($product);
             $manager->flush();
 
-            return $this->redirectToRoute('show_one_drink', [
-                'id' => $drink->getId(),
-                'type' => $drink->getType()
+            return $this->redirectToRoute('show_one_product', [
+                'id' => $product->getId(),
+                'type' => $product->getType()
                 ]);
         }
                                         
-        return $this->render('product/createDrink.html.twig', [
-            'formDrink' => $form->createView(),
-            'editMode' => $drink->getId() !== null  // true si l'objet existe déjà (dans ce cas on veut éditer et non pas créer)
+        return $this->render('product/createProduct.html.twig', [
+            'formProduct' => $form->createView(),
+            'editMode' => $product->getId() !== null  // true si l'objet existe déjà (dans ce cas on veut éditer et non pas créer)
         ]);
     }
  
     /**
-     * @Route("/product/drink/{type}", name="drink")
+     * @Route("/product/{type}", name="product")
      */
-    public function drink($type, DrinkRepository $repo): Response
+    public function product($type, ProductRepository $repo): Response
     {
-        $drinks = $repo->findByType($type);
+        $products = $repo->findByType($type);
 
-        return $this->render('product/drink.html.twig', [
-            'drinks' => $drinks,
+        return $this->render('product/product.html.twig', [
+            'products' => $products,
             'type' => $type
         ]);
     }
 
     /**
-     * @Route("/product/drink/{type}/{id}", name="show_one_drink")
+     * @Route("/product/{type}/{id}", name="show_one_product")
      */
-    public function show($id, DrinkRepository $repo, Request $request, EntityManagerInterface $manager)
+    public function show($id, ProductRepository $repo, Request $request, EntityManagerInterface $manager)
     {
-        $drink = $repo->find($id);
+        $product = $repo->find($id);
 
-        $drinkComment = new DrinkComment();
+        $productComment = new ProductComment();
         
-        $form = $this->createForm(DrinkCommentType::class, $drinkComment);
+        $form = $this->createForm(ProductCommentType::class, $productComment);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $drinkComment->setCreatedAt(new \DateTime());   // On renseigne dans l'objet drinkComment à quelle date le commentaire a été crée
-            $drinkComment->setDrink($drink);                // On renseigne dans l'objet drinkComment à quel produit le commentaire doit être lié
+            $productComment->setCreatedAt(new \DateTime());   // On renseigne dans l'objet productComment à quelle date le commentaire a été crée
+            $productComment->setProduct($product);                // On renseigne dans l'objet productComment à quel produit le commentaire doit être lié
             
-            $manager->persist($drinkComment);
+            $manager->persist($productComment);
             $manager->flush();
 
-            return $this->redirectToRoute('show_one_drink', [
-                'id' => $drink->getId(),
-                'type' => $drink->getType()
+            return $this->redirectToRoute('show_one_product', [
+                'id' => $product->getId(),
+                'type' => $product->getType()
                 ]);
         }
 
-        return $this->render('product/showOneDrink.html.twig', [
-            'drink' => $drink,
-            'drinkCommentForm' =>$form->createView()
+        return $this->render('product/showOneProduct.html.twig', [
+            'product' => $product,
+            'productCommentForm' =>$form->createView()
         ]);
     }
 }

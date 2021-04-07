@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formProduct 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        {% if editMode %}
+            Modification d'un produit
+        {% else %}
+            Création d'un produit
+        {% endif %}
+    </h1>
+
+    {{ form_start(formProduct) }} {# balise ouvrante du form avec ses options #}
+
+    {{ form_row(formProduct.name, {'label': 'Nom'}) }}
+    {{ form_row(formProduct.images, {'label': 'Images'}) }}
+    {{ form_row(formProduct.region, {'label': 'Région'}) }}
+    {{ form_row(formProduct.description, {'label': 'Description'}) }}
+    {{ form_row(formProduct.volume, {'label': 'Volume'}) }}
+    {{ form_row(formProduct.weight, {'label': 'Poids'}) }}
+    {{ form_row(formProduct.price, {'label': 'Prix'}) }}
+    {{ form_row(formProduct.type, {'label': 'Type'}) }}
+    <br/>
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer
+        {% else %}
+            Ajouter le produit
+        {% endif %}
+    </button>
+
+    {{ form_end(formProduct) }} {# balise fermante précédée de toute les champs présent dans le form et non appelé (comportement par défaut) #}
+
+{% endblock %}

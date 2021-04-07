@@ -34,24 +34,24 @@
                         Vins
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('drink', {'type': 'red_wine'}) }}">Vins rouges</a>
-                        <a class="dropdown-item" href="{{ path('drink', {'type': 'white_wine'}) }}">Vins blancs</a>
-                        <a class="dropdown-item" href="{{ path('drink', {'type': 'rose_wine'}) }}">Vins rosés</a>
+                        <a class="dropdown-item" href="{{ path('product', {'type': 'red_wine'}) }}">Vins rouges</a>
+                        <a class="dropdown-item" href="{{ path('product', {'type': 'white_wine'}) }}">Vins blancs</a>
+                        <a class="dropdown-item" href="{{ path('product', {'type': 'rose_wine'}) }}">Vins rosés</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path('drink', {'type': 'champagne'}) }}">Champagnes & Bulles</a>
+                        <a class="dropdown-item" href="{{ path('product', {'type': 'champagne'}) }}">Champagnes & Bulles</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Jambons Serrano</a>
+                        <a class="nav-link" href="{{ path('product', {'type': 'ham'}) }}">Jambons Serrano</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Foies gras & Terrines</a>
+                        <a class="nav-link" href="{{ path('product', {'type': 'foie_gras'}) }}">Foies gras & Terrines</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Huiles & Truffes</a>
+                        <a class="nav-link" href="{{ path('product', {'type': 'oil'}) }}">Huiles & Truffes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('create_drink') }}">Creation article</a>
+                        <a class="nav-link" href="{{ path('create_product') }}">Creation article</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

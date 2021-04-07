@@ -2,16 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\DrinkRepository;
+use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=DrinkRepository::class)
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Drink
+class Product
 {
     /**
      * @ORM\Id
@@ -22,60 +21,52 @@ class Drink
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez entrer le nom du produit")
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=500)
-     * @Assert\NotBlank(message="Veuillez entrer le nom des images")
-     * @Assert\Length(min=10, max=255, minMessage="10 caractères minimum", maxMessage="255 caractères maximum")
-     * @Assert\Regex("/.jpg$/", message="Les images doivent être au format .jpg")
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $images;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez entrer la région du produit")
-     * @Assert\Length(min=3, max=255, minMessage="3 caractères minimum", maxMessage="255 caractères maximum")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $region;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(max=1000, maxMessage="1000 caractères maximum")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank(message="Veuillez entrer le volume du produit")
-     * @Assert\Type(type="float")     
+     * @ORM\Column(type="float", nullable=true)
      */
     private $volume;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $weight;
+
+    /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank(message="Veuillez entrer le prix du produit")
-     * @Assert\Type(type="float")
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez entrer le type du produit")
-     * @Assert\Length(min=6, max=50)
      */
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=DrinkComment::class, mappedBy="drink", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ProductComment::class, mappedBy="product", orphanRemoval=true)
      */
-    private $drinkComments;
+    private $productComments;
 
     public function __construct()
     {
-        $this->drinkComments = new ArrayCollection();
+        $this->productComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,7 +91,7 @@ class Drink
         return $this->images;
     }
 
-    public function setImages(string $images): self
+    public function setImages(?string $images): self
     {
         $this->images = $images;
 
@@ -112,7 +103,7 @@ class Drink
         return $this->region;
     }
 
-    public function setRegion(string $region): self
+    public function setRegion(?string $region): self
     {
         $this->region = $region;
 
@@ -136,9 +127,21 @@ class Drink
         return $this->volume;
     }
 
-    public function setVolume(float $volume): self
+    public function setVolume(?float $volume): self
     {
         $this->volume = $volume;
+
+        return $this;
+    }
+
+    public function getWeight(): ?float
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?float $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }
@@ -168,29 +171,29 @@ class Drink
     }
 
     /**
-     * @return Collection|DrinkComment[]
+     * @return Collection|ProductComment[]
      */
-    public function getDrinkComments(): Collection
+    public function getProductComments(): Collection
     {
-        return $this->drinkComments;
+        return $this->productComments;
     }
 
-    public function addDrinkComment(DrinkComment $drinkComment): self
+    public function addProductComment(ProductComment $productComment): self
     {
-        if (!$this->drinkComments->contains($drinkComment)) {
-            $this->drinkComments[] = $drinkComment;
-            $drinkComment->setDrink($this);
+        if (!$this->productComments->contains($productComment)) {
+            $this->productComments[] = $productComment;
+            $productComment->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeDrinkComment(DrinkComment $drinkComment): self
+    public function removeProductComment(ProductComment $productComment): self
     {
-        if ($this->drinkComments->removeElement($drinkComment)) {
+        if ($this->productComments->removeElement($productComment)) {
             // set the owning side to null (unless already changed)
-            if ($drinkComment->getDrink() === $this) {
-                $drinkComment->setDrink(null);
+            if ($productComment->getProduct() === $this) {
+                $productComment->setProduct(null);
             }
         }
 

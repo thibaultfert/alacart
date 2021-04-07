@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body%}
+    <article>
+        <h2>{{ product.name }}</h2>
+        <div class="content">
+            <div class="row">
+                <div class="col-3">
+                    <div height="200px"><img src="{{ asset('images/test.jpg') }}" alt="" height="100%"></div>
+                </div>
+                <div class="col-9">
+                    <p>{{ product.region }}</p>
+                    <p style="font-style: italic">"{{ product.description }}"</p>
+                    <p>{{ product.volume }}L</p>
+                    <p>{{ product.price }}EUR</p>
+                </div>
+            </div>
+        </div>
+    </article>
+    <hr>
+    <section id="commentaires">
+        <h1>Commentaires</h1>
+        {% for productComment in product.productComments %}
+            <div class="comment">
+                <div class="row">
+                    <div class="col-3">
+                        {{ productComment.author }} (<small>{{ productComment.createdAt | date ('d/m/Y à H:i') }}</small>)
+                    </div> 
+                    <div class="col-9">
+                        {{ productComment.content | raw }} {# raw permet de prendre en compte les <br/> du content #}
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+
+        {% if app.user %}
+        <h1>Ajouter un commentaire</h1>
+        {{ form_start(productCommentForm) }}
+        {{ form_row(productCommentForm.author, {'label': 'Auteur', 'attr': {'palceholder': 'Votre nom'}})}}
+        {{ form_row(productCommentForm.content, {'label': 'Commentaire', 'attr': {'palceholder': 'Votre commentaire'}})}}
+        <button class="btn btn-success">Envoyer</button>
+        {{ form_end(productCommentForm) }}
+
+        {% else %}
+        <h4>Pour laisser un commentaire, merci de vous connecter</h4>
+        <a href="{{ path('security_login') }}"><button class="btn btn-secondary">Se connecter</button></a>
+        {% endif %}
+
+    </section>
+{% endblock %}

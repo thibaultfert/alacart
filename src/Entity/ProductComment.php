@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\DrinkCommentRepository;
+use App\Repository\ProductCommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=DrinkCommentRepository::class)
+ * @ORM\Entity(repositoryClass=ProductCommentRepository::class)
  */
-class DrinkComment
+class ProductComment
 {
     /**
      * @ORM\Id
@@ -33,10 +33,10 @@ class DrinkComment
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Drink::class, inversedBy="drinkComments")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="productComments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $drink;
+    private $product;
 
     public function getId(): ?int
     {
@@ -79,14 +79,14 @@ class DrinkComment
         return $this;
     }
 
-    public function getDrink(): ?Drink
+    public function getProduct(): ?Product
     {
-        return $this->drink;
+        return $this->product;
     }
 
-    public function setDrink(?Drink $drink): self
+    public function setProduct(?Product $product): self
     {
-        $this->drink = $drink;
+        $this->product = $product;
 
         return $this;
     }
