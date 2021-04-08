@@ -1,38 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {% if type == 'red_wine' %}
-        Vins Rouges
-    {% elseif type == 'white_wine' %}
-        Vins Blancs
-    {% elseif type == 'rose_wine' %}
-        Vins Rosés
-    {% elseif type == 'champagne' %}
-        Champagnes & Bulles
-    {% else %}
-        Vins & Gourmandises
-    {% endif %}
+    {{ pageTitle }}
 {% endblock %}
 
 {% block body %}
-    {% for product in products %}
-    <article>
-        <h2>{{ product.name }}</h2>
-        <div class="content">
-            <div class="row">
-                <div class="col-3">
-                    <div height="200px"><img class="img-fluid" src="{{ asset('images/test.jpg') }}" alt="" height="100%"></div>
-                </div>
-                <div class="col">
-                    <p>{{ product.region }}</p>
-                    <p>{{ product.volume }}L</p>
-                    <p>{{ product.price }}EUR</p>
+    <div id="central_bloc" style="background: {{ backgroundImage }}">
+        <div class="container">
+            {% for product in products %}
+            <article>
+                <h2>{{ product.name }}</h2>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-3">
+                            <div height="200px"><img class="img-fluid" src="{{ asset('images/test.jpg') }}" alt="" height="100%"></div>
+                        </div>
+                        <div class="col d-flex flex-column justify-content-between">
+                            <div>{{ product.region }}</div>
+                            <div>{{ product.volume }}L</div>
+                            <div>{{ product.price }}EUR</div>
 
-                    <a href="{{ path('show_one_product', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-primary">Plus d'infos</a>
+                            <div><a href="{{ path('show_one_product', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info">Plus d'infos</a></div>
+                            <div><a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary align-self-end">Ajouter à ma liste</a></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </article>
+            <hr> 
+            {% endfor %}
         </div>
-    </article>
-    <hr>
-    {% endfor %}
+    </div>
 {% endblock %}

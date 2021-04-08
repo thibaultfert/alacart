@@ -1,0 +1,40 @@
+@font-face {
+	font-family: 'dancing_script';
+	src: url('../font/DancingScript-Regular.otf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'barlow_light';
+	src: url('../font/Barlow-Light.otf') format('truetype');	
+	font-weight: normal;
+	font-style: normal;
+}
+
+html
+{
+	height: 100%;
+	width: 100%;	
+	font-family: var(--police-pr);
+	font-size: var(--font-size-gen);
+}
+
+body 
+{ 
+	height: 100%;
+	width: 100%;
+	display:grid;
+	grid-template-rows: minmax(100px, 10%) minmax(600px, 90%);
+	border: 1px solid red;
+}
+
+#central_bloc
+{
+	height: 100%;
+	width: 100%;
+	max-height: 100%;
+	overflow: auto;
+}
+
+

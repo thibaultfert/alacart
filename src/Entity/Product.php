@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -21,16 +22,21 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez entrer le nom du produit")
+     * @Assert\Length(max=255, maxMessage="255 caractères maximum")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Assert\Length(max=500, maxMessage="500 caractères maximum")
+     * @Assert\Regex("/.jpg$/", message="Les images doivent être au format .jpg")
      */
     private $images;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255, maxMessage="255 caractères maximum")
      */
     private $region;
 
@@ -41,21 +47,26 @@ class Product
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Type(type="float")     
      */
     private $volume;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Type(type="float")     
      */
     private $weight;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Veuillez entrer le prix du produit")
+     * @Assert\Type(type="float")     
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez entrer le type du produit")
      */
     private $type;
 

@@ -60,9 +60,47 @@ class ProductController extends AbstractController
     {
         $products = $repo->findByType($type);
 
+        switch ($type) {
+            case 'red_wine':
+                $pageTitle = "Vins Rouges";
+                $backgroundImage = "url('../images/red_wine.jpg') no-repeat center";
+                break;
+            case 'white_wine':
+                $pageTitle = "Vins Blancs";
+                $backgroundImage = "url('../images/white_wine.jpg') no-repeat center";
+                break;
+            case 'rose_wine':
+                $pageTitle = "Vins Roses";
+                $backgroundImage = "url('../images/rose_wine.jpg') no-repeat center";
+                break;
+            case 'champagne':
+                $pageTitle = "Champagnes & Bulles";
+                $backgroundImage = "url('../images/champagne.jpg') no-repeat center";
+                break;
+            case 'ham':
+                $pageTitle = "Jambon Serrano";
+                $backgroundImage = "url('../images/ham.jpg') no-repeat center";
+                break;
+            case 'foie_gras':
+                $pageTitle = "Foies Gras & Terrines";
+                $backgroundImage = "url('../images/foie_gras.jpg') no-repeat center";
+                break;
+            case 'oil':
+                $pageTitle = "Huiles";
+                $backgroundImage = "url('../images/oil.jpg') no-repeat center";
+                break;
+            
+            default:
+                $pageTitle = "Vins & Gourmandises";
+                $backgroundImage = "url('../images/home.jpg') no-repeat center";
+                $backgroundImage = "";
+                break;
+        }
+
         return $this->render('product/product.html.twig', [
             'products' => $products,
-            'type' => $type
+            'pageTitle' => $pageTitle,
+            'backgroundImage' => $backgroundImage
         ]);
     }
 
