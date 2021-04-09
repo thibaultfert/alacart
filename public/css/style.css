@@ -1,3 +1,16 @@
+:root {
+	--police-pr: 'dancing_script';
+	--police-sec: 'barlow_light';
+	--font-size-gen : 10px;
+	--font-size-medium: 1.3rem;	
+	/*--font-size-description: 1.5rem;
+	--font-size-little: 1.9rem;
+
+	--font-size-large : 7rem;
+	--font-size-title : 4rem;
+*/
+}
+
 @font-face {
 	font-family: 'dancing_script';
 	src: url('../font/DancingScript-Regular.otf') format('truetype');
@@ -16,25 +29,84 @@ html
 {
 	height: 100%;
 	width: 100%;	
-	font-family: var(--police-pr);
-	font-size: var(--font-size-gen);
 }
 
 body 
 { 
 	height: 100%;
 	width: 100%;
-	display:grid;
-	grid-template-rows: minmax(100px, 10%) minmax(600px, 90%);
-	border: 1px solid red;
+	font-family: var(--police-pr);
+	font-size: var(--font-size-gen);
+}
+
+nav
+{
+	font-size: var(--font-size-medium);	
 }
 
 #central_bloc
-{
+{	
 	height: 100%;
 	width: 100%;
 	max-height: 100%;
+	padding-top: 60px; 		/* Pour ne pas que la partie top soit caché sous la nav */	
+	background-size: cover;
 	overflow: auto;
 }
+/*
+#products_bloc
+{
+	font-family: var(--police-sec);	
+	background-color: ;
+}*/
 
+#products_bloc
+{
+	font-family: var(--police-sec);	
+	animation: fadein 5s;
+    -moz-animation: fadein 5s; /* Firefox */
+    -webkit-animation: fadein 5s; /* Safari et Chrome */
+    -o-animation: fadein 5s; /* Opera */
+}
 
+.product_row
+{
+	min-height : 200px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* sur Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* sur Safari et Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* sur Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}

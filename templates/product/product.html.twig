@@ -5,28 +5,29 @@
 {% endblock %}
 
 {% block body %}
-    <div id="central_bloc" style="background: {{ backgroundImage }}">
-        <div class="container">
+    <div id="central_bloc" style="background: {{ backgroundImage }}; ">
+        <div class="container" id="products_bloc">
             {% for product in products %}
             <article>
-                <h2>{{ product.name }}</h2>
                 <div class="content">
-                    <div class="row">
-                        <div class="col-3">
-                            <div height="200px"><img class="img-fluid" src="{{ asset('images/test.jpg') }}" alt="" height="100%"></div>
+                    <div class="row product_row align-items-center">
+                        <div class="col-3 ">
+                            <div height="200px"><img class="img-fluid " src="{{ asset('images/test.jpg') }}" alt="" height="100%"></div>
                         </div>
                         <div class="col d-flex flex-column justify-content-between">
+                            <h3>{{ product.name }}</h3>
                             <div>{{ product.region }}</div>
                             <div>{{ product.volume }}L</div>
                             <div>{{ product.price }}EUR</div>
 
-                            <div><a href="{{ path('show_one_product', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info">Plus d'infos</a></div>
-                            <div><a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary align-self-end">Ajouter à ma liste</a></div>
+                            <div>
+                                <a href="{{ path('show_one_product', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info">Plus d'infos</a>
+                                <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary align-self-end">Ajouter à ma liste</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </article>
-            <hr> 
             {% endfor %}
         </div>
     </div>
