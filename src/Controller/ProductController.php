@@ -63,44 +63,33 @@ class ProductController extends AbstractController
         switch ($type) {
             case 'red_wine':
                 $pageTitle = "Vins Rouges";
-                $backgroundImage = "url('../images/red_wine.jpg') no-repeat center";
                 break;
             case 'white_wine':
                 $pageTitle = "Vins Blancs";
-                $backgroundImage = "url('../images/white_wine.jpg') no-repeat center";
                 break;
             case 'rose_wine':
                 $pageTitle = "Vins Roses";
-                $backgroundImage = "url('../images/rose_wine.jpg') no-repeat center";
                 break;
             case 'champagne':
-                $pageTitle = "Champagnes & Bulles";
-                $backgroundImage = "url('../images/champagne.jpg') no-repeat center";
+                $pageTitle = "Champagnes et Bulles";
                 break;
             case 'ham':
                 $pageTitle = "Jambon Serrano";
-                $backgroundImage = "url('../images/ham.jpg') no-repeat center";
                 break;
             case 'foie_gras':
-                $pageTitle = "Foies Gras & Terrines";
-                $backgroundImage = "url('../images/foie_gras.jpg') no-repeat center";
+                $pageTitle = "Foies Gras et Terrines";
                 break;
             case 'oil':
                 $pageTitle = "Huiles";
-                $backgroundImage = "url('../images/oil.jpg') no-repeat center";
-                break;
-            
+                break;          
             default:
-                $pageTitle = "Vins & Gourmandises";
-                $backgroundImage = "url('../images/home.jpg') no-repeat center";
-                $backgroundImage = "";
+                $pageTitle = "Alacart' - Vins & Gourmandises";
                 break;
         }
 
         return $this->render('product/product.html.twig', [
             'products' => $products,
             'pageTitle' => $pageTitle,
-            'backgroundImage' => $backgroundImage
         ]);
     }
 
@@ -119,7 +108,7 @@ class ProductController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $productComment->setCreatedAt(new \DateTime());   // On renseigne dans l'objet productComment à quelle date le commentaire a été crée
-            $productComment->setProduct($product);                // On renseigne dans l'objet productComment à quel produit le commentaire doit être lié
+            $productComment->setProduct($product);            // On renseigne dans l'objet productComment à quel produit le commentaire doit être lié
             
             $manager->persist($productComment);
             $manager->flush();

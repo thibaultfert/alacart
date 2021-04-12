@@ -38,10 +38,26 @@ class CartService {
     {
         $cart = $this->session->get('cart', []);
         
-        // Si le produit est déjà dans le panier alors on incrémente sa quantité
+        // Si le produit est bien dans le panier alors on décrémente sa quantité
+        // Si la quantité du produit est égale à 1 alors on supprime l'item (unset)
+        if ( $cart[$id] == 1) {
+            unset($cart[$id]);
+        } elseif (  $cart[$id] > 1) {
+            $cart[$id]--;
+        }
+
+        // On actualise la donnée 'cart' liée à la session
+        $this->session->set('cart', $cart);
+    }
+
+    public function remove_all(int $id) 
+    {
+        $cart = $this->session->get('cart', []);
+        
+        // Si le produit est déjà bien le panier alors on efface l'item (quelque soit sa quantité)
         if (!empty($cart[$id])) {
             unset($cart[$id]);
-        }   
+        }
 
         // On actualise la donnée 'cart' liée à la session
         $this->session->set('cart', $cart);

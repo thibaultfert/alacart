@@ -12,7 +12,7 @@ class CartController extends AbstractController
     /**
      * @Route("/cart", name="cart_index")
      */
-    public function index_index(CartService $cartService)
+    public function index(CartService $cartService)
     {
         // On envoi au template les données du tableaux enrichi les exploitées à l'affichage
         return $this->render('cart/index.html.twig', [
@@ -36,6 +36,16 @@ class CartController extends AbstractController
     public function remove($id, CartService $cartService) 
     {
         $cartService->remove($id);
+
+        return $this->redirectToRoute("cart_index");
+    }
+
+    /**
+     * @Route("/cart/remove_all/{id}", name="cart_remove_all")
+     */
+    public function remove_all($id, CartService $cartService) 
+    {
+        $cartService->remove_all($id);
 
         return $this->redirectToRoute("cart_index");
     }
