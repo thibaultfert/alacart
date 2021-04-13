@@ -23,10 +23,10 @@
         {% endblock %}
     </head>
     <body>
-       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <a class="navbar-brand" href="{{ path('home') }}">
-                <div id="logo_text">Alacart'</div>
-                <div><img class="img-fluid " src="{{ asset('images/logo.png') }}" alt="logo" style="max-height: 50px;"></div>
+       <nav class="navbar navbar-expand-lg navbar-light d-flex align-items-center bg-light">
+            <a class="navbar-brand d-flex" href="{{ path('main_home') }}">
+                <div id="logo_text" class="d-flex align-items-center justify-content-center">Alacart'</div>
+                <div class="d-flex align-items-center justify-content-center"><img class="img-fluid" src="{{ asset('images/logo.png') }}" alt="logo" style="max-height: 50px;"></div>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,25 +39,25 @@
                         Vins
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('product', {'type': 'red_wine'}) }}">Vins rouges</a>
-                        <a class="dropdown-item" href="{{ path('product', {'type': 'white_wine'}) }}">Vins blancs</a>
-                        <a class="dropdown-item" href="{{ path('product', {'type': 'rose_wine'}) }}">Vins rosés</a>
+                        <a class="dropdown-item" href="{{ path('product_show_by_type', {'type': 'red_wine'}) }}">Vins rouges</a>
+                        <a class="dropdown-item" href="{{ path('product_show_by_type', {'type': 'white_wine'}) }}">Vins blancs</a>
+                        <a class="dropdown-item" href="{{ path('product_show_by_type', {'type': 'rose_wine'}) }}">Vins rosés</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path('product', {'type': 'champagne'}) }}">Champagnes & Bulles</a>
+                        <a class="dropdown-item" href="{{ path('product_show_by_type', {'type': 'champagne'}) }}">Champagnes & Bulles</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('product', {'type': 'ham'}) }}">Jambons Serrano</a>
+                        <a class="nav-link" href="{{ path('product_show_by_type', {'type': 'ham'}) }}">Jambons Serrano</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('product', {'type': 'foie_gras'}) }}">Foies gras & Terrines</a>
+                        <a class="nav-link" href="{{ path('product_show_by_type', {'type': 'foie_gras'}) }}">Foies gras & Terrines</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('product', {'type': 'oil'}) }}">Huiles & Truffes</a>
+                        <a class="nav-link" href="{{ path('product_show_by_type', {'type': 'oil'}) }}">Huiles & Truffes</a>
                     </li>
                     {% if app.user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('create_product') }}">Creation article</a>
+                        <a class="nav-link" href="{{ path('product_show_by_type') }}">Creation article</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -81,7 +81,7 @@
             </div>
         </nav>
 
-        <div id="central_bloc">
+        <div id="central_block">
             {% block body %}
             {% endblock %}
         </div>

@@ -1,9 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <div class="container">
-        <h1>Bienvenue</h1>
+{% block body %} 
+    {#<div class="d-flex w-100 h-100 justify-content-center align-items-center">
+        <div id="home_block" class="container-fluid d-flex flex-column w-75 h-75 p-4 align-items-stretch">
+            <div class="row justify-content-center align-items-center">
+                <h1 class="text-center"><strong>Alacart'</strong>, votre distributeur parisien</h1>
+            </div>
+            <div class="row flex-grow-1 justify-content-center align-items-center">
+                <p>Une sélection à prix grossiste.</p>
+            </div>
+            <div class="row flex-grow-1 justify-content-center align-items-center">
+                <p>Livraison Paris intra-muros dès 60 bouteilles</p>
+            </div>
+            <div class="row flex-grow-1 justify-content-center align-items-center police_pr">
+                <a href="" class="btn btn-info btn-lg">Plus d'informations</a>
+            </div>
+            <div class="row justify-content-center police_pr">
+                <div><font size="-2">L'abus d'alcool est dangeureux pour la santé, à consommer avec modération.</br>
+            </div>          
+        </div>#}
 
-        <p>Ici mettre la page d'accueil du site !</p>
+    <div id="home_block" class="container-fluid d-flex flex-column w-100 h-100">
+        <div class="row flex-column flex-grow-1 justify-content-center align-items-center">
+            <div id="home_title" class="text-center">Alacart'</div>
+            <div id="home_subtitle" class="text-center">Votre distributeur parisien</div> 
+        </div>
     </div>
 {% endblock %}

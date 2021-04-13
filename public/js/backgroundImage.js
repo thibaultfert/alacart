@@ -1,4 +1,4 @@
-var centralBlocElt = document.getElementById("central_bloc");
+var centralBlocElt = document.getElementById("central_block");
 var pageTitleElt = document.getElementById("page_title");
 var titleContent = pageTitleElt.innerHTML;
 

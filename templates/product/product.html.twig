@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container" id="products_bloc">
+    <div class="container" id="products_block">
         {% for product in products %}
         <article>
             <div class="content">
@@ -13,15 +13,19 @@
                     <div class="col-3">
                         <div height="200px"><img class="img-fluid " src="{{ asset('images/test.jpg') }}" alt="" height="100%"></div>
                     </div>
-                    <div class="col d-flex flex-column justify-content-between">
-                        <h3>{{ product.name }}</h3>
+                    <div class="col d-flex flex-column justify-content-around">
+                        <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}" style="color:black;">
+                            <h2>{{ product.name }}</h2>
+                        </a>
                         <div>{{ product.region }}</div>
                         <div>{{ product.volume }}L</div>
                         <div>{{ product.price }}EUR</div>
 
-                        <div>
-                            <a href="{{ path('show_one_product', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info">Fiche produit</a>
-                            <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary align-self-end">Ajouter à mon panier</a>
+                        <div id="product_button">
+                            <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info">Fiche produit</a>
+                            <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary">
+                                Ajouter à mon panier
+                            </a>
                         </div>
                     </div>
                 </div>

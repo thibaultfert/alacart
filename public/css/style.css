@@ -3,8 +3,11 @@
 	--police-sec: 'dancing_script';
 	--police-brand: 'arizonia';
 	--font-size-gen : 15px;
+	--font-size-nav: 1.2rem;
+	--font-size-brand: 3rem;
 	--font-size-medium: 1.2rem;	
-	--font-size-large: 2.3rem;
+	--font-size-home-subtitle: 6rem;
+	--font-size-home-title: 11rem;
 	/*--font-size-description: 1.5rem;
 	--font-size-little: 1.9rem;
 
@@ -22,14 +25,14 @@
 
 @font-face {
 	font-family: 'barlow_light';
-	src: url('../font/Barlow-Light.otf') format('truetype');	
+	src: url('../font/LibreBodoni-Regular.ttf') format('truetype');	
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'arizonia';
-	src: url('../font/Daniel-Black.otf') format('truetype');	
+	src: url('../font/Quentin.ttf') format('truetype');	
 	font-weight: normal;
 	font-style: normal;
 }
@@ -37,47 +40,69 @@
 html
 {
 	height: 100%;
-	width: 100%;	
+	width: 100%;
+	font-size: var(--font-size-gen);
+	font-family: var(--police-pr);	
 }
 
 body 
 { 
 	height: 100%;
 	width: 100%;
-	font-family: var(--police-pr);
-	font-size: var(--font-size-gen);
+	display: grid;
+	grid-template-rows: minmax(min-content, 10%) minmax(min-content, 90%); /* 10% navabr 90% central_bloc */
 }
 
 nav
 {
-	font-size: var(--font-size-medium);	
-	font-family: var(--police-sec);
+	display: flex;
+	align-items: center;
+	font-size: var(--font-size-nav);	
+	font-family: var(--police-pr);
 }
 
 .navbar-brand
 {
-	display: flex;
-	align-items: center;
-}
-#logo_text
-{
-	font-size: var(--font-size-large);	
-	/*font-family: var(--police-brand);*/
+	font-size: var(--font-size-brand);	
+	font-family: var(--police-brand);
 }
 
-#central_bloc
+.navbar-toggler-icon
+{
+	font-size: 2rem;
+}
+
+#central_block
 {	
 	height: 100%;
 	width: 100%;
-	max-height: 100%;
-	padding-top: 80px; 		/* Pour ne pas que la partie top soit caché sous la nav */	
+	min-height: 100%;
     background-position: center;
     background-size: cover;
 	overflow: auto;
 }
 
-#products_bloc
+#home_block
 {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	color: #FFFFFF;
+}
+#home_title {
+	font-size: var(	--font-size-home-title);
+	font-family: var(--police-brand);
+}
+#home_subtitle	
+{	
+	font-size: var(	--font-size-home-subtitle);
+	font-family: var(--police-brand);
+}
+
+#products_block
+{
+	font-family: var(--police-pr);
+	font-size: var(	--font-size-medium);
 	animation: fadein 5s;
     -moz-animation: fadein 5s; /* Firefox */
     -webkit-animation: fadein 5s; /* Safari et Chrome */
@@ -91,6 +116,11 @@ nav
 	margin-bottom: 5px;
     border-radius: 2px;
     background-color: rgba(255, 255, 255, 0.85);
+}
+
+.police_pr
+{
+	font-family: var(--police-pr);
 }
 
 .nav-item {

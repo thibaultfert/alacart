@@ -17,8 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/product/create_product", name="create_product")
-     * @Route("/product/{id}/edit_product", name="edit_product") 
+     * @Route("/product/create", name="product_create")
+     * @Route("/product/{id}/edit", name="product_edit") 
      */
     // Si c'est la 1ere route qui nous amène ici, l'objet $product sera null d'où la mention dans les param de la fct
     // Si c'est la 2eme route, grâce à l'id en paramètre, 
@@ -41,7 +41,7 @@ class ProductController extends AbstractController
             $manager->persist($product);
             $manager->flush();
 
-            return $this->redirectToRoute('show_one_product', [
+            return $this->redirectToRoute('product_show_one', [
                 'id' => $product->getId(),
                 'type' => $product->getType()
                 ]);
@@ -54,9 +54,9 @@ class ProductController extends AbstractController
     }
  
     /**
-     * @Route("/product/{type}", name="product")
+     * @Route("/product/{type}", name="product_show_by_type")
      */
-    public function product($type, ProductRepository $repo): Response
+    public function productShowByType($type, ProductRepository $repo): Response
     {
         $products = $repo->findByType($type);
 
@@ -94,9 +94,9 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/{type}/{id}", name="show_one_product")
+     * @Route("/product/{type}/{id}", name="product_show_one")
      */
-    public function show($id, ProductRepository $repo, Request $request, EntityManagerInterface $manager)
+    public function productShowOne($id, ProductRepository $repo, Request $request, EntityManagerInterface $manager)
     {
         $product = $repo->find($id);
 
@@ -113,7 +113,7 @@ class ProductController extends AbstractController
             $manager->persist($productComment);
             $manager->flush();
 
-            return $this->redirectToRoute('show_one_product', [
+            return $this->redirectToRoute('product_show_one', [
                 'id' => $product->getId(),
                 'type' => $product->getType()
                 ]);
