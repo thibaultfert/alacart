@@ -1,29 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %} 
-    {#<div class="d-flex w-100 h-100 justify-content-center align-items-center">
-        <div id="home_block" class="container-fluid d-flex flex-column w-75 h-75 p-4 align-items-stretch">
-            <div class="row justify-content-center align-items-center">
-                <h1 class="text-center"><strong>Alacart'</strong>, votre distributeur parisien</h1>
-            </div>
-            <div class="row flex-grow-1 justify-content-center align-items-center">
-                <p>Une sélection à prix grossiste.</p>
-            </div>
-            <div class="row flex-grow-1 justify-content-center align-items-center">
-                <p>Livraison Paris intra-muros dès 60 bouteilles</p>
-            </div>
-            <div class="row flex-grow-1 justify-content-center align-items-center police_pr">
-                <a href="" class="btn btn-info btn-lg">Plus d'informations</a>
-            </div>
-            <div class="row justify-content-center police_pr">
-                <div><font size="-2">L'abus d'alcool est dangeureux pour la santé, à consommer avec modération.</br>
-            </div>          
-        </div>#}
-
-    <div id="home_block" class="container-fluid d-flex flex-column w-100 h-100">
+    <div id="home_block" class="container-fluid d-flex flex-column w-100 h-100 text-center">
         <div class="row flex-column flex-grow-1 justify-content-center align-items-center">
-            <div id="home_title" class="text-center">Alacart'</div>
-            <div id="home_subtitle" class="text-center">Votre distributeur parisien</div> 
+            <div id="home_title">Alacart'</div>
+            <div id="home_subtitle">Votre distributeur parisien</div> 
+        </div>
+        <div id="home_text" class="row flex-grow-1 justify-content-center align-items-center">
+            <div class="col-12 col-md-5 mx-1 my-2">
+                Une sélection à prix grossiste
+            </div>
+            <div class="col-12 col-md-5 mx-1 my-2">
+                 Livraison à Paris intra-muros dès 60 bouteilles
+            </div>         
+        </div>
+        <div class="row flex-grow-1 justify-content-center align-items-center police_pr">
+            <a href="" class="btn btn-info btn-lg mx-4">Plus d'informations</a>
+        </div>
+        <div class="row justify-content-center police_pr">
+            <div>
+                <font size="-2">L'abus d'alcool est dangeureux pour la santé, à consommer avec modération.</br>
+                                Produits et Millésimes sous réserve des ventes effectuées.</font></div>
+			</div>
         </div>
     </div>
 {% endblock %}

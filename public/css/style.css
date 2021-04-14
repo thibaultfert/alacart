@@ -1,37 +1,24 @@
 :root {
-	--police-pr: 'barlow_light';
-	--police-sec: 'dancing_script';
-	--police-brand: 'arizonia';
+	--police-pr: 'elpis';
+	--police-brand: 'quentin';
 	--font-size-gen : 15px;
 	--font-size-nav: 1.2rem;
 	--font-size-brand: 3rem;
-	--font-size-medium: 1.2rem;	
-	--font-size-home-subtitle: 6rem;
+	--font-size-medium: 2.2rem;	
 	--font-size-home-title: 11rem;
-	/*--font-size-description: 1.5rem;
-	--font-size-little: 1.9rem;
-
-	--font-size-large : 7rem;
-	--font-size-title : 4rem;
-*/
+	--font-size-home-subtitle: 4rem;
+	--font-size-home-text: 2.2rem;
 }
 
 @font-face {
-	font-family: 'dancing_script';
-	src: url('../font/DancingScript-Regular.otf') format('truetype');
+	font-family: 'elpis';
+	src: url('../font/GFSElpis.otf') format('truetype');	
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
-	font-family: 'barlow_light';
-	src: url('../font/LibreBodoni-Regular.ttf') format('truetype');	
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'arizonia';
+	font-family: 'quentin';
 	src: url('../font/Quentin.ttf') format('truetype');	
 	font-weight: normal;
 	font-style: normal;
@@ -49,8 +36,6 @@ body
 { 
 	height: 100%;
 	width: 100%;
-	display: grid;
-	grid-template-rows: minmax(min-content, 10%) minmax(min-content, 90%); /* 10% navabr 90% central_bloc */
 }
 
 nav
@@ -77,6 +62,8 @@ nav
 	height: 100%;
 	width: 100%;
 	min-height: 100%;
+	padding-top: 90px;
+	display: flex;
     background-position: center;
     background-size: cover;
 	overflow: auto;
@@ -86,8 +73,9 @@ nav
 {
 	height: 100%;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
 	color: #FFFFFF;
+	font-family: var(--police-brand);
 }
 #home_title {
 	font-size: var(	--font-size-home-title);
@@ -97,6 +85,12 @@ nav
 {	
 	font-size: var(	--font-size-home-subtitle);
 	font-family: var(--police-brand);
+}
+#home_text	
+{	
+	font-size: var(	--font-size-medium);
+	font-family: var(--police-pr);
+	background-color: rgba(0, 0, 0, 0.85);
 }
 
 #products_block
@@ -117,6 +111,30 @@ nav
     border-radius: 2px;
     background-color: rgba(255, 255, 255, 0.85);
 }
+
+#one_product_block
+{
+	font-family: var(--police-pr);
+}
+
+footer
+{
+	font-family: var(--police-pr);
+	color: white;
+}
+
+.logos_contact
+{
+	max-height: 80%;
+	max-width: 80%;
+}
+
+a, a:hover
+{
+	color: white;
+}
+
+
 
 .police_pr
 {
@@ -183,3 +201,4 @@ nav
         opacity: 1;
     }
 }
+
