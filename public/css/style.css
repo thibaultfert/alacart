@@ -1,18 +1,26 @@
 :root {
-	--police-pr: 'elpis';
+	--police-pr: 'chalkserif';
+	--police-sec: 'quickjump';
 	--police-brand: 'quentin';
-	--font-size-gen : 15px;
-	--font-size-nav: 1.2rem;
-	--font-size-brand: 3rem;
-	--font-size-medium: 1.6rem;	
-	--font-size-home-title: 11rem;
-	--font-size-home-subtitle: 4rem;
-	--font-size-home-text: 2.2rem;
+	--font-size-gen : 20px;
+	--font-size-nav: 1.0rem;
+	--font-size-brand: 2.0rem;
+	--font-size-medium: 2.3rem;	
+	--font-size-home-title: 7rem;
+	--font-size-home-subtitle: 3rem;
+	--font-size-home-text: 1.7rem;
 }
 
 @font-face {
-	font-family: 'elpis';
-	src: url('../font/GFSElpis.otf') format('truetype');	
+	font-family: 'chalkserif';
+	src: url('../font/ChalkSerif.otf') format('truetype');	
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'quickjump';
+	src: url('../font/Quick Jump.ttf') format('truetype');	
 	font-weight: normal;
 	font-style: normal;
 }
@@ -54,7 +62,7 @@ nav
 
 .navbar-toggler-icon
 {
-	font-size: 2rem;
+	font-size: 1.2rem;
 }
 
 #central_block
@@ -88,8 +96,8 @@ nav
 }
 #home_text	
 {	
-	font-size: var(	--font-size-medium);
-	font-family: var(--police-pr);
+	font-size: var(	--font-size-home-text);
+	font-family: var(--police-sec);
 	background-color: rgba(0, 0, 0, 0.85);
 }
 

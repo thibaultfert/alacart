@@ -32,5 +32,6 @@ switch (titleContent){
     centralBlocElt.style.backgroundImage = "url('../images/oil.jpg')";
     break;  
     default:
+    centralBlocElt.style.backgroundImage = "none";
     console.error('Aucun marque page reconnu');
 }
