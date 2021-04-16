@@ -12,17 +12,16 @@
                 Une sélection à prix grossiste
             </div>
             <div class="col-12 col-lg-5 mx-1 my-2">
-                <img src="{{ asset('images/logos/livraison.png') }}" alt="logo_glass" height="70rem"><br/>
+                <img src="{{ asset('images/logos/delivery.png') }}" alt="logo_delivery" height="70rem"><br/>
                  Livraison à Paris intra-muros dès 60 bouteilles
             </div>         
         </div>
         <div class="row flex-grow-1 justify-content-center align-items-center police_pr">
-            <a href="" class="btn btn-info btn-lg mx-4">Plus d'informations</a>
+            <a href="{{ path('main_order_info') }}" class="btn btn-info btn-lg mx-4">Plus d'informations</a>
         </div>
         <div class="row justify-content-center police_pr">
-            <div>
-                <font size="-2">L'abus d'alcool est dangeureux pour la santé, à consommer avec modération.</br>
-                                Produits et Millésimes sous réserve des ventes effectuées.</font></div>
+            <div id="home_caution">L'abus d'alcool est dangeureux pour la santé, à consommer avec modération.</br>
+                 Produits et Millésimes sous réserve des ventes effectuées.</font></div>
 			</div>
         </div>
     </div>

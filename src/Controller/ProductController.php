@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Entity\ProductComment;
 use App\Form\ProductType;
+use App\Entity\ProductComment;
 use App\Form\ProductCommentType;
-use App\Repository\ProductRepository;
+use App\Service\Product\ProductService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,57 +56,26 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/{type}", name="product_show_by_type")
      */
-    public function productShowByType($type, ProductRepository $repo): Response
+    public function productShowByType($type, ProductService $productService): Response
     {
-        $products = $repo->findByType($type);
-
-        switch ($type) {
-            case 'red_wine':
-                $pageTitle = "Vins Rouges";
-                break;
-            case 'white_wine':
-                $pageTitle = "Vins Blancs";
-                break;
-            case 'rose_wine':
-                $pageTitle = "Vins Roses";
-                break;
-            case 'champagne':
-                $pageTitle = "Champagnes et Bulles";
-                break;
-            case 'ham':
-                $pageTitle = "Jambon Serrano";
-                break;
-            case 'foie_gras':
-                $pageTitle = "Foies Gras et Terrines";
-                break;
-            case 'oil':
-                $pageTitle = "Huiles";
-                break;          
-            default:
-                $pageTitle = "Alacart' - Vins & Gourmandises";
-                break;
-        }
-
         return $this->render('product/product.html.twig', [
-            'products' => $products,
-            'pageTitle' => $pageTitle,
+            'products' => $productService->getAllItemsByType($type),
+            'pageTitle' => $productService->getProductPageTitle($type)
         ]);
     }
 
     /**
      * @Route("/product/{type}/{id}", name="product_show_one")
      */
-    public function productShowOne($id, ProductRepository $repo, Request $request, EntityManagerInterface $manager)
+    public function productShowOne($id, ProductService $productService, Request $request, EntityManagerInterface $manager)
     {
-        $product = $repo->find($id);
-
         $productComment = new ProductComment();
         
-        $form = $this->createForm(ProductCommentType::class, $productComment);
+        $commentForm = $this->createForm(ProductCommentType::class, $productComment);
 
-        $form->handleRequest($request);
+        $commentForm->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if($commentForm->isSubmitted() && $commentForm->isValid()) {
             $productComment->setCreatedAt(new \DateTime());   // On renseigne dans l'objet productComment à quelle date le commentaire a été crée
             $productComment->setProduct($product);            // On renseigne dans l'objet productComment à quel produit le commentaire doit être lié
             
@@ -120,8 +89,8 @@ class ProductController extends AbstractController
         }
 
         return $this->render('product/showOneProduct.html.twig', [
-            'product' => $product,
-            'productCommentForm' =>$form->createView()
+            'product' => $productService->getOneItemById($id),
+            'productCommentForm' =>$commentForm->createView()
         ]);
     }
 }

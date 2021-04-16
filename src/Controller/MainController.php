@@ -46,4 +46,12 @@ class MainController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/main/order_info", name="main_order_info")
+     */
+    public function orderInfo()
+    {
+        return $this->render('main/orderInfo.html.twig');
+    }
+
 }

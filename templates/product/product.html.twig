@@ -10,8 +10,8 @@
         <article>
             <div class="content">
                 <div class="row product_row py-2">
-                    <div class="col-3">
-                        <div height="200px"><img class="img-fluid " src="{{ asset('images/test.jpg') }}" alt="" height="100%"></div>
+                    <div class="col-3 d-flex align-items-center border border-danger">
+                        <img class="img-fluid" src="{{ asset('images/test.jpg') }}" alt="product_photo">
                     </div>
                     <div class="col d-flex flex-column justify-content-around">
                         <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}" style="color:black;">
@@ -32,5 +32,15 @@
             </div>
         </article>
         {% endfor %}
+        <div id="overlay">
+            <div id="popup">
+                <div id="popup_content">
+                    <!-- <div id="popup_header"><span id="bouton_close">&times;</span></div> -->
+                    <div id="popup_header"><img id="bouton_close" src="../images/bouton_close.jpg"></div>
+                    <div id="popup_body"><img id="popup_image"></div>
+                    <div id="popup_footer"></div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

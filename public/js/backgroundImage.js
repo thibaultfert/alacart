@@ -30,6 +30,9 @@ switch (titleContent){
     break;
     case 'Huiles':
     centralBlocElt.style.backgroundImage = "url('../images/oil.jpg')";
+    break;
+    case 'Informations Commande':
+    centralBlocElt.style.backgroundImage = "url('../images/order_info.jpg')";
     break;  
     default:
     centralBlocElt.style.backgroundImage = "none";
