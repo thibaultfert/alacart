@@ -15,23 +15,46 @@
         </h1>
 
         {{ form_start(formProduct) }} {# balise ouvrante du form avec ses options #}
+        <div class="row mx-auto">
+            <div class="col-12">
+                {{ form_row(formProduct.name, {'label': 'Nom'}) }}
+            </div>
+            <div class="col-8">
+                {{ form_row(formProduct.images, {'label': 'Nom de l\'image (sans .jpg)'}) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(formProduct.numberOfImages, {'label': 'Nombre d\'images'}) }}
+            </div>
+            <div class="col-12">
+                {{ form_row(formProduct.region, {'label': 'Région'}) }}
+            </div>
+            <div class="col-12">
+                {{ form_row(formProduct.description, {'label': 'Description'}) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(formProduct.volume, {'label': 'Volume'}) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(formProduct.weight, {'label': 'Poids'}) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(formProduct.price, {'label': 'Prix'}) }}            
+            </div>
+            <div class="col-12">
+                {{ form_row(formProduct.type, {'label': 'Type'}) }}
+            </div>
+            <br/>
+            <div class="col">
+                <button type="submit" class="btn btn-success">
+                    {% if editMode %}
+                        Enregistrer
+                    {% else %}
+                        Ajouter le produit
+                    {% endif %}
+                </button>            
+            </div>
+        </div
 
-        {{ form_row(formProduct.name, {'label': 'Nom'}) }}
-        {{ form_row(formProduct.images, {'label': 'Images'}) }}
-        {{ form_row(formProduct.region, {'label': 'Région'}) }}
-        {{ form_row(formProduct.description, {'label': 'Description'}) }}
-        {{ form_row(formProduct.volume, {'label': 'Volume'}) }}
-        {{ form_row(formProduct.weight, {'label': 'Poids'}) }}
-        {{ form_row(formProduct.price, {'label': 'Prix'}) }}
-        {{ form_row(formProduct.type, {'label': 'Type'}) }}
-        <br/>
-        <button type="submit" class="btn btn-success">
-            {% if editMode %}
-                Enregistrer
-            {% else %}
-                Ajouter le produit
-            {% endif %}
-        </button>
 
         {{ form_end(formProduct) }} {# balise fermante précédée de toute les champs présent dans le form et non appelé (comportement par défaut) #}
     </div>

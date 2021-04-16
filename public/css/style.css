@@ -125,101 +125,24 @@ nav
     background-color: rgba(255, 255, 255, 0.85);
 }
 
-		#overlay 
-		{
-			width: 100%;
-			height: 100%;
-			display: none;
-			background-color: rgba(255 ,255 ,255 , 0.35);
-			z-index: 1;
-		}
-
-		#popup
-		{
-			width : 100%;
-			height: 100%;
-			display: flex;
-			justify-content: center;
-			font-size: var(--font-size-little);
-			/*border: 1px solid blue;*/
-		}
-
-		#popup_content
-		{
-			width: 60%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			align-items: center;
-			background-color: rgb(243, 243, 243);
-			box-shadow: 7px 3px 5px black;
-			border-radius: 5px;
-			/*border: 1px solid green;*/
-		}
-
-		#popup_header
-		{
-			width: 100%;
-			height: 30px;
-			display: flex;
-			justify-content: flex-end;
-			/*border: 1px solid blue;*/
-		}
-
-		#popup_body
-		{
-			width: 100%;
-			height: 90%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			/*border: 1px solid white;*/
-		}
-		#popup_footer
-		{
-			width : 70%;
-			max-width : 500px;
-			height: 40px;
-			display: flex;
-			justify-content: space-around;
-			align-content: center;
-			align-items: center;
-		}
-
-		.bouton_popup
-		{
-			height: 30px;
-			width: 30px;
-			cursor: pointer;
-			display: flex;
-			justify-content: space-around;
-			align-items: center;
-			font-family: var(--police-sec);
-			opacity: 0.5;
-			transition:all 0.3s ease;
-			border: 1px solid black;
-		}
-
-		.bouton_popup:hover
-		{
-			opacity: 1;
-			border-radius:10%;
-			-webkit-transform: scale(1.2);
-			-ms-transform: scale(1.2);
-			transform: scale(1.2);
-		}
-
-		#bouton_close 
-		{
-			height: 100%;
-			cursor: pointer;
-			margin: 5px;
-		}
-
 #one_product_block, #order_info_block
 {
 	font-family: var(--police-pr);
+}
+
+#one_product_info_part
+{
+	height: 100%;
+}
+
+#product_image_carousel
+{
+	height: 100% ;
+}
+
+.carousel-control-next, .carousel-control-prev /* fleches du carousel couleur noire */
+{
+    filter: invert(100%);
 }
 
 .order_info_box
@@ -249,6 +172,12 @@ footer
 }
 
 a, a:hover
+{
+	color: black;
+	text-decoration: none;
+}
+
+footer a, footer a:hover
 {
 	color: white;
 }

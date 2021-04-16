@@ -30,9 +30,19 @@ class Product
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
      * @Assert\Length(max=500, maxMessage="500 caractères maximum")
-     * @Assert\Regex("/.jpg$/", message="Les images doivent être au format .jpg")
      */
     private $images;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(type="int")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 10,
+     *      notInRangeMessage = "Vous devez rentrer un nombre d'images compris entre 0 et 10",
+     * )     
+     * */
+    private $numberOfImages;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -105,6 +115,18 @@ class Product
     public function setImages(?string $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getNumberOfImages(): ?int
+    {
+        return $this->numberOfImages;
+    }
+
+    public function setNumberOfImages(?int $numberOfImages): self
+    {
+        $this->numberOfImages = $numberOfImages;
 
         return $this;
     }
