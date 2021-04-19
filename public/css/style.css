@@ -78,6 +78,7 @@ nav
 	overflow: auto;
 	font-family: var(--police-pr);
 	font-size: var(	--font-size-medium);
+	border: 1px solid blue;
 }
 
 #home_block
@@ -130,14 +131,10 @@ nav
 	font-family: var(--police-pr);
 }
 
-#one_product_info_part
+.carousel_image
 {
+	width: auto;
 	height: 100%;
-}
-
-#product_image_carousel
-{
-	height: 100% ;
 }
 
 .carousel-control-next, .carousel-control-prev /* fleches du carousel couleur noire */
