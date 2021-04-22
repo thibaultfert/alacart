@@ -37,14 +37,14 @@ class User implements UserInterface
      * @Assert\NotBlank(message="Veuillez entrer votre prénom")
      * @Assert\Length(max=255, maxMessage="255 caractères maximum")
      */
-    private $userFirstName;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Veuillez entrer votre nom")
      * @Assert\Length(max=255, maxMessage="255 caractères maximum")
      */
-    private $userLastName;
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -60,6 +60,16 @@ class User implements UserInterface
      * @Assert\EqualTo(propertyPath="password", message="Les deux mots de passe sont différents")
      */
     private $confirm_password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $enable;
 
     public function getId(): ?int
     {
@@ -78,26 +88,26 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUserFirstName(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->userFirstName;
+        return $this->firstName;
     }
 
-    public function setUserFirstName(string $userFirstName): self
+    public function setFirstName(string $firstName): self
     {
-        $this->userFirstName = $userFirstName;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
-    public function getUserLastName(): ?string
+    public function getLastName(): ?string
     {
-        return $this->userLastName;
+        return $this->lastName;
     }
 
-    public function setUserLastName(string $userLastName): self
+    public function setLastName(string $lastName): self
     {
-        $this->userLastName = $userLastName;
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -126,13 +136,25 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
     // fonctions à déclarer car demandées par l'interface UserInterface
     public function eraseCredentials() {}
 
     public function getUsername() {
-        return $this->userLastName; // Même si on se sert déjà de getUserFirstName et getUserLastName
+        return $this->lastName;     // Même si on se sert déjà de getUserFirstName et getUserLastName
                                     // Il faut que le composant Security accède à une donnée 'username'
-                                    // ici la plus cohérente serait notre attribut userLastName donc on lui fournit
+                                    // ici la plus cohérente serait notre attribut lastName donc on lui fournit
     } 
 
     
@@ -140,5 +162,17 @@ class User implements UserInterface
 
     public function getRoles() {
         return ['ROLE_USER'];
+    }
+
+    public function getEnable(): ?bool
+    {
+        return $this->enable;
+    }
+
+    public function setEnable(?bool $enable): self
+    {
+        $this->enable = $enable;
+
+        return $this;
     }
 }

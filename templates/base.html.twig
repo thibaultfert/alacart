@@ -24,7 +24,7 @@
         {% endblock %}
     </head>
     <body>
-       <nav class="navbar navbar-expand-xl navbar-light d-flex align-items-center bg-light fixed-top">
+        <nav class="navbar navbar-expand-xl navbar-light d-flex align-items-center bg-light fixed-top">
             <a class="navbar-brand d-flex" href="{{ path('main_home') }}">
                 <div id="logo_text" class="d-flex align-items-center justify-content-center">Alacart'</div>
                 <div class="d-flex align-items-center justify-content-center"><img class="img-fluid" src="{{ asset('images/logos/brand_logo.png') }}" alt="logo" style="max-height: 50px;"></div>
@@ -57,9 +57,11 @@
                         <a class="nav-link" href="{{ path('product_show_by_type', {'type': 'oil'}) }}">Huiles & Truffes</a>
                     </li>
                     {% if app.user %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('product_show_by_type') }}">Creation article</a>
-                    </li>
+                        {% if app.user.email == "thibaultfert@gmail.com" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('product_create') }}">Creation article</a>
+                        </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
                 <ul class="nav navbar-nav ml-auto">                
@@ -83,105 +85,112 @@
         </nav>
 
         <div class="container-fluid" id="central_block">
+            {% for label, messages in app.flashes(['success', 'warning']) %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}" style="font-family: sans-serif; font-size: 0.8em;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
             {% block body %}
-            {% endblock %}
-        </div>
+            {% endblock %}  
+         
+            <footer class="row-fluid bg-dark text-center">
+                <!-- Grid container -->
+                <div class="container p-4">
+                <!-- Section: Raccourci de contact -->
+                    <section class="mb-4">
+                    <a href="tel:+33782666390">
+                        <img 	class="logos_contact mx-4" 
+                                src="{{ asset('images/logos/call.png') }}"
+                                alt="logo_call">
+                    </a>
+                    <a href="mailto:alacart.distribution@gmail.com">
+                            <img  	class="logos_contact mx-4" 
+                                    src="{{ asset('images/logos/email.png') }}"
+                                    alt="logo_email">
+                        </a>
+                    </section>
+                    <!-- Section: Text -->
+                    <section class="mb-4">
+                    <p>
+                        Entreprise de fournisseurs en vins et produits fins pour les restaurants parisiens, nous ouvrons une partie de notre gamme pour le particulier.
+                        N'hésitez pas à nous contacter pour plus d'informations sur nos produits, la livraison ou tout autre thème !
+                    </p>
+                    </section>
+                    <!-- Section: Text -->
 
-        
-        <footer class="bg-dark text-center">
-            <!-- Grid container -->
-            <div class="container p-4">
-            <!-- Section: Raccourci de contact -->
-                <section class="mb-4">
-                <a href="tel:+33782666390">
-					<img 	class="logos_contact mx-4" 
-							src="{{ asset('images/logos/call.png') }}"
-     						alt="logo_call">
-     			</a>
-                <a href="mailto:alacart.distribution@gmail.com">
-						<img  	class="logos_contact mx-4" 
-								src="{{ asset('images/logos/email.png') }}"
-     							alt="logo_email">
-     				</a>
-                </section>
-                <!-- Section: Text -->
-                <section class="mb-4">
-                <p>
-                    Entreprise de fournisseurs en vins et produits fins pour les restaurants parisiens, nous ouvrons une partie de notre gamme pour le particulier.
-                    N'hésitez pas à nous contacter pour plus d'informations sur nos produits, la livraison ou tout autre thème !
-                </p>
-                </section>
-                <!-- Section: Text -->
+                    <!-- Section: Links -->
+                    <section class="">
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Grid column-->
+                        <div class="col-6 col-lg-4 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Vins &amp; Champagnes</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="{{ path('product_show_by_type', {'type': 'red_wine'}) }}">Vins rouges</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('product_show_by_type', {'type': 'white_wine'}) }}">Vins blancs</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('product_show_by_type', {'type': 'rose_wine'}) }}">Vins rosés</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('product_show_by_type', {'type': 'champagne'}) }}">Champagnes et Bulles</a>
+                            </li>
+                        </ul>
+                        </div>
+                        <!--Grid column-->
 
-                <!-- Section: Links -->
-                <section class="">
-                <!--Grid row-->
-                <div class="row">
-                    <!--Grid column-->
-                    <div class="col-6 col-lg-4 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Vins &amp; Champagnes</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="{{ path('product_show_by_type', {'type': 'red_wine'}) }}">Vins rouges</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('product_show_by_type', {'type': 'white_wine'}) }}">Vins blancs</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('product_show_by_type', {'type': 'rose_wine'}) }}">Vins rosés</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('product_show_by_type', {'type': 'champagne'}) }}">Champagnes et Bulles</a>
-                        </li>
-                    </ul>
+                        <!--Grid column-->
+                        <div class="col-6 col-lg-4 mb-md-0">
+                        <h5 class="text-uppercase">Produits fins</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="{{ path('product_show_by_type', {'type': 'ham'}) }}">Jambon Serrano</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('product_show_by_type', {'type': 'foie gras'}) }}">Foies gras et Terrines</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('product_show_by_type', {'type': 'oil'}) }}">Huiles et Truffes</a>
+                            </li>
+                        </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-12 col-lg-4 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Contact</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="{{ path('main_contact') }}">Nous contacter</a>
+                            </li>
+                            <li>07 82 66 63 90</li>
+                            <li>alacart.distribution@gmail.com</li>
+                        </ul>
+                        </div>
+                        <!--Grid column-->
                     </div>
-                    <!--Grid column-->
-
-                     <!--Grid column-->
-                    <div class="col-6 col-lg-4 mb-md-0">
-                    <h5 class="text-uppercase">Produits fins</h5>
-
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="{{ path('product_show_by_type', {'type': 'ham'}) }}">Jambon Serrano</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('product_show_by_type', {'type': 'foie gras'}) }}">Foies gras et Terrines</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('product_show_by_type', {'type': 'oil'}) }}">Huiles et Truffes</a>
-                        </li>
-                    </ul>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-12 col-lg-4 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Contact</h5>
-
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="{{ path('main_contact') }}">Nous contacter</a>
-                        </li>
-                        <li>0782666390</li>
-                        <li>alacart.distribution@gmail.com</li>
-                    </ul>
-                    </div>
-                    <!--Grid column-->
+                    <!--Grid row-->
+                    </section>
+                    <!-- Section: Links -->
                 </div>
-                <!--Grid row-->
-                </section>
-                <!-- Section: Links -->
-            </div>
-            <!-- Grid container -->
+                <!-- Grid container -->
 
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2021 Copyright: Alacart
-            </div>
-            <!-- Copyright -->
-        </footer>
-
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2021 Copyright: Alacart
+                </div>
+                <!-- Copyright -->
+            </footer>
+        
+        </div>
         <script src="{{ asset('js/backgroundImage.js') }}"></script>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

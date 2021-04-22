@@ -17,6 +17,7 @@ class CartController extends AbstractController
         // On envoi au template les données du tableaux enrichi les exploitées à l'affichage
         return $this->render('cart/index.html.twig', [
             'items' => $cartService->getFullCart(),
+            'wineBoxQuantity' => $cartService->getWineBoxQuantity(),
             'total' => $cartService->getTotal()
         ]);
     }

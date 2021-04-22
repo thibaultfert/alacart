@@ -5,25 +5,32 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container" id="products_block">
+    <div class="container-fluid" id="products_block">
         {% for product in products %}
         <article>
             <div class="content">
-                <div class="row product_row py-2">
-                    <div class="col-3 d-flex align-items-center justify-content-center">
+                <div class="row product_row py-1">
+                    <div class="col-12">
+                    <a  href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}"
+                        class="d-block d-sm-none">
+                        <h2>{{ product.name }}</h2>
+                    </a>
+                    </div>
+                    <div class="col-12 col-sm-3 d-flex align-items-center justify-content-center">
                         <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}">
                             <img class="img-fluid" src="{{ asset('images/test1.jpg') }}" alt="product_photo">
                         </a>
                     </div>
-                    <div class="col d-flex flex-column justify-content-around">
-                        <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}">
+                    <div class="col-12 col-sm-9 d-flex flex-column justify-content-around">
+                        <a  href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}"
+                            class="d-none d-sm-block">
                             <h2>{{ product.name }}</h2>
                         </a>
                         <div>{{ product.region }}</div>
                         <div>{{ product.volume }}L</div>
                         <div>{{ product.price }}EUR</div>
 
-                        <div id="product_button">
+                        <div>
                             <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info">Fiche produit</a>
                             <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary">
                                 Ajouter à mon panier

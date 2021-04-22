@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Entity\ProductComment;
 use App\Form\ProductCommentType;
+use App\Service\User\UserService;
 use App\Service\Product\ProductService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,8 +67,12 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/product/{type}/{id}", name="product_show_one")
+     * @Route("/product/{type}/{id}/{userId}", name="product_add_comment")
      */
-    public function productShowOne($id, ProductService $productService, Request $request, EntityManagerInterface $manager)
+    // Si c'est la 1ere route qui nous amène ici, c'est une ouverture de la page sans particularité
+    // Si c'est la 2eme route, c'est qu'un form de comment a été soumis
+    // c'est dans ce 2eme cas que le $userId sera exploité
+    public function productShowOne($id, $userId = null, ProductService $productService, UserService $userService, Request $request, EntityManagerInterface $manager)
     {
         $productComment = new ProductComment();
         
@@ -75,22 +80,25 @@ class ProductController extends AbstractController
 
         $commentForm->handleRequest($request);
 
-        if($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $productComment->setCreatedAt(new \DateTime());   // On renseigne dans l'objet productComment à quelle date le commentaire a été crée
-            $productComment->setProduct($product);            // On renseigne dans l'objet productComment à quel produit le commentaire doit être lié
-            
-            $manager->persist($productComment);
-            $manager->flush();
+        if($commentForm->isSubmitted() && $commentForm->isValid() && $userId) {
+                $productComment->setAuthor($userService->getOneItemById($userId)->getFirstName());
+                $productComment->setCreatedAt(new \DateTime());                               // On renseigne dans l'objet productComment à quelle date le commentaire a été crée
+                $productComment->setProduct($productService->getOneItemById($id));            // On renseigne dans l'objet productComment à quel produit le commentaire doit être lié
+                
+                $manager->persist($productComment);
+                $manager->flush();
 
-            return $this->redirectToRoute('product_show_one', [
-                'id' => $product->getId(),
-                'type' => $product->getType()
-                ]);
+                $this->addFlash('success','Merci pour votre commentaire !');
+
+                return $this->redirectToRoute('product_show_one', [
+                    'id' => $id,
+                    'type' => $productService->getOneItemById($id)->getType()
+                    ]);
         }
-
         return $this->render('product/showOneProduct.html.twig', [
             'product' => $productService->getOneItemById($id),
-            'productCommentForm' =>$commentForm->createView()
+            'productCommentForm' => $commentForm->createView(),
+            'userId'=> $userId
         ]);
     }
 }

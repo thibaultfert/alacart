@@ -94,4 +94,23 @@ class CartService {
 
         return $total;
     }
+
+    public function getWineBoxQuantity() : int
+    {
+        $wineBoxQuantity = 0;
+        $cart = $this->session->get('cart', []);
+
+        foreach ($cart as $id => $quantity) {
+            $item = $this->productRepository->find($id);
+            if (    $item->getType() == 'red_wine'
+                ||  $item->getType() == 'white_wine'
+                ||  $item->getType() == 'rose_wine'
+                ||  $item->getType() == 'champagne') 
+                {
+                    $wineBoxQuantity += $quantity;
+                }
+        }
+        return $wineBoxQuantity;
+        
+    }
 }

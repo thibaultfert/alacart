@@ -5,37 +5,39 @@
 {% form_theme formContact 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
+   <div class="container h-100 d-flex justify-content-center align-items-center">
+        <div class="row w-100 d-flex flex-column justify-content-center border border-secondary rounded">
+            <div class="col-12">
+                <h1>Contact</h1>
+
+                {{ form_start(formContact) }}
+
+                <div class="row mx-auto">
+                    <div class="col">
+                        {{ form_row(formContact.firstName, {'label': 'Prénom'}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(formContact.lastName, {'label': 'Nom'}) }}
+                    </div>
                 </div>
-        {% endfor %}
-        <h1>Contact</h1>
+                <div class="row mx-auto">
+                    <div class="col">
+                        {{ form_row(formContact.email, {'label': 'Email'}) }} 
+                        {{ form_row(formContact.phoneNumber, {'label': 'Numéro de téléphone (optionnel)'}) }}    
+                        {{ form_row(formContact.message, {'label': 'Message'}) }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row mx-auto my-1">
+                    <div class="col">
+                        <button class="btn btn-success">Envoyer</button>
+                    </div>
+                </div>
+                {{ form_end(formContact) }}
 
-        {{ form_start(formContact) }}
-
-        <div class="row mx-auto">
-            <div class="col">
-                {{ form_row(formContact.firstName, {'label': 'Prénom'}) }}
-            </div>
-            <div class="col">
-                {{ form_row(formContact.lastName, {'label': 'Nom'}) }}
             </div>
         </div>
-        <div class="row mx-auto">
-            <div class="col">
-                {{ form_row(formContact.email, {'label': 'Email'}) }} 
-                {{ form_row(formContact.phoneNumber, {'label': 'Numéro de téléphone (optionnel)'}) }}    
-                {{ form_row(formContact.message, {'label': 'Message'}) }}
-            </div>
-        </div>
-        <hr>
-        <div class="row mx-auto">
-            <div class="col">
-                <button class="btn btn-success">Envoyer</button>
-            </div>
-        </div>
-        {{ form_end(formContact) }}
     </div>
+
+    
 {% endblock %}

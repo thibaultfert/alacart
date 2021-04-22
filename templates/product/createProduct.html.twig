@@ -5,57 +5,70 @@
 {% form_theme formProduct 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <h1>
-            {% if editMode %}
-                Modification d'un produit
-            {% else %}
-                Création d'un produit
-            {% endif %}
-        </h1>
 
-        {{ form_start(formProduct) }} {# balise ouvrante du form avec ses options #}
-        <div class="row mx-auto">
-            <div class="col-12">
-                {{ form_row(formProduct.name, {'label': 'Nom'}) }}
-            </div>
-            <div class="col-8">
-                {{ form_row(formProduct.images, {'label': 'Nom de l\'image (sans .jpg)'}) }}
-            </div>
-            <div class="col-4">
-                {{ form_row(formProduct.numberOfImages, {'label': 'Nombre d\'images'}) }}
-            </div>
-            <div class="col-12">
-                {{ form_row(formProduct.region, {'label': 'Région'}) }}
-            </div>
-            <div class="col-12">
-                {{ form_row(formProduct.description, {'label': 'Description'}) }}
-            </div>
-            <div class="col-4">
-                {{ form_row(formProduct.volume, {'label': 'Volume'}) }}
-            </div>
-            <div class="col-4">
-                {{ form_row(formProduct.weight, {'label': 'Poids'}) }}
-            </div>
-            <div class="col-4">
-                {{ form_row(formProduct.price, {'label': 'Prix'}) }}            
-            </div>
-            <div class="col-12">
-                {{ form_row(formProduct.type, {'label': 'Type'}) }}
-            </div>
-            <br/>
-            <div class="col">
-                <button type="submit" class="btn btn-success">
+    {% if app.user %}
+        {% if app.user.email == "thibaultfert@gmail.com" %}
+            <div class="container-fluid">
+                <h1>
                     {% if editMode %}
-                        Enregistrer
+                        Modification d'un produit
                     {% else %}
-                        Ajouter le produit
+                        Création d'un produit
                     {% endif %}
-                </button>            
+                </h1>
+
+                {{ form_start(formProduct) }} {# balise ouvrante du form avec ses options #}
+                <div class="row mx-auto">
+                    <div class="col-12">
+                        {{ form_row(formProduct.name, {'label': 'Nom'}) }}
+                    </div>
+                    <div class="col-8">
+                        {{ form_row(formProduct.images, {'label': 'Nom de l\'image (sans .jpg)'}) }}
+                    </div>
+                    <div class="col-4">
+                        {{ form_row(formProduct.numberOfImages, {'label': 'Nombre d\'images'}) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(formProduct.region, {'label': 'Région'}) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(formProduct.description, {'label': 'Description'}) }}
+                    </div>
+                    <div class="col-4">
+                        {{ form_row(formProduct.volume, {'label': 'Volume'}) }}
+                    </div>
+                    <div class="col-4">
+                        {{ form_row(formProduct.weight, {'label': 'Poids'}) }}
+                    </div>
+                    <div class="col-4">
+                        {{ form_row(formProduct.price, {'label': 'Prix'}) }}            
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(formProduct.type, {'label': 'Type'}) }}
+                    </div>
+                    <br/>
+                    <div class="col">
+                        <button type="submit" class="btn btn-success">
+                            {% if editMode %}
+                                Enregistrer
+                            {% else %}
+                                Ajouter le produit
+                            {% endif %}
+                        </button>            
+                    </div>
+                </div
+                {{ form_end(formProduct) }} {# balise fermante précédée de toute les champs présent dans le form et non appelé (comportement par défaut) #}
             </div>
-        </div
+            
+        {% else %}
+            <div class="container h-100">
+                <h3>Vous n'êtes pas connecté en tant qu'administrateur</h3>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="container h-100">
+            <h3>Vous n'êtes pas connecté</h3>
+        </div>
+    {% endif %}
 
-
-        {{ form_end(formProduct) }} {# balise fermante précédée de toute les champs présent dans le form et non appelé (comportement par défaut) #}
-    </div>
 {% endblock %}

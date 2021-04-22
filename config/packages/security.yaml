@@ -20,12 +20,13 @@ security:
             provider: in_database
 
             form_login: 
-                login_path: security_login
+                login_path: main_home
                 check_path: security_login
+                failure_path: security_failure_login
 
             logout:
                 path: security_logout
-                target: home
+                target: main_home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

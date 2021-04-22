@@ -5,34 +5,39 @@
 {% form_theme formRegistration 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <h1>Inscription</h1>
+    <div class="container h-100 d-flex justify-content-center align-items-center">
+        <div class="row w-100 d-flex flex-column justify-content-center border border-secondary rounded">
+            <div class="col-12">
+                <h1>Inscription</h1>
 
-        {{ form_start(formRegistration) }}
+                {{ form_start(formRegistration) }}
 
-        <div class="row mx-auto">
-            <div class="col">
-                {{ form_row(formRegistration.userFirstName, {'label': 'Prénom'}) }}
-            </div>
-            <div class="col">
-                {{ form_row(formRegistration.userLastName, {'label': 'Nom'}) }}
-            </div>
-        </div>
-        <div class="row mx-auto">
-            <div class="col">
-                {{ form_row(formRegistration.email, {'label': 'Email'}) }}     
-                {{ form_row(formRegistration.password, {'label': 'Mot de Passe',
-                                                        'type': 'password'}) }}
-                {{ form_row(formRegistration.confirm_password, {'label': 'Confirmation du mot de passe', 
+                <div class="row mx-auto">
+                    <div class="col">
+                        {{ form_row(formRegistration.firstName, {'label': 'Prénom'}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(formRegistration.lastName, {'label': 'Nom'}) }}
+                    </div>
+                </div>
+                <div class="row mx-auto">
+                    <div class="col">
+                        {{ form_row(formRegistration.email, {'label': 'Email'}) }}     
+                        {{ form_row(formRegistration.password, {'label': 'Mot de Passe',
                                                                 'type': 'password'}) }}
-            </div>
+                        {{ form_row(formRegistration.confirm_password, {'label': 'Confirmation du mot de passe', 
+                                                                        'type': 'password'}) }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row mx-auto my-1">
+                    <div class="col">
+                        <button class="btn btn-success">Enregistrer</button>
+                    </div>
+                </div>
+                {{ form_end(formRegistration) }}    
+
+            </div>   
         </div>
-        <hr>
-        <div class="row mx-auto">
-            <div class="col">
-                <button class="btn btn-success">Enregistrer</button>
-            </div>
-        </div>
-        {{ form_end(formRegistration) }}
-    </div>
+    </div>        
 {% endblock %}
