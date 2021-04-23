@@ -167,6 +167,12 @@ footer
 	max-width: 80%;
 }
 
+.min-content-height
+{
+	min-height: 100%;
+	height: min-content;
+}
+
 a, a:hover
 {
 	color: black;

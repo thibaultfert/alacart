@@ -1,0 +1,41 @@
+<p>Prénom: {{ contact.firstName }}</p>
+<p>Nom: {{ contact.lastName }}</p>
+<p>Email: {{ contact.email }}</p>
+<p>Commande:</p>
+<h1>Votre Panier</h1>
+{# items | lenght permet de récupérer la longueur du tab items #}
+{# Permet de savoir si on a un panier rempli ou pas #}
+{% if items | length > 0 %} 
+    <div class="content">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.product.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.product.price * item.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total : </td> {#colspan="3" car prend la largeur des trois colonnes de gauche#}
+                    <td>{{ total }}</td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+{% endif %}
