@@ -81,6 +81,9 @@ nav
 
 #home_block
 {
+	display : flex;
+	flex-direction: column;
+	justify-content: space-between;
 	color: #FFFFFF;
 	font-family: var(--police-brand);
 }
