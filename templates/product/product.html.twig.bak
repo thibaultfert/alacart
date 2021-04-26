@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-12 col-sm-3 d-flex align-items-center justify-content-center">
                         <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}">
-                            <img class="img-fluid" src="{{ asset('images/product/' ~ product.type ~ '/'  ~ product.images ~ '.jpg') }}" alt="product_photo">
+                            <img class="img-fluid" src="{{ asset('images/test1.jpg') }}" alt="product_photo">
                         </a>
                     </div>
                     <div class="col-12 col-sm-9 d-flex flex-column justify-content-around">
