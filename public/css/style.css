@@ -1,11 +1,11 @@
 :root {
-	--police-pr: 'chalkserif';
+	--police-pr: 'champagnelimousines';
 	--police-sec: 'quickjump';
 	--police-brand: 'quentin';
 	--font-size-gen : 20px;
-	--font-size-nav: 1.1rem;
+	--font-size-nav: 0.9rem;
 	--font-size-brand: 2.0rem;
-	--font-size-medium: 1.2rem;	
+	--font-size-medium: 1.0rem;	
 	--font-size-home-title: 7rem;
 	--font-size-home-subtitle: 3rem;
 	--font-size-home-text: 1.7rem;
@@ -13,8 +13,8 @@
 }
 
 @font-face {
-	font-family: 'chalkserif';
-	src: url('../font/ChalkSerif.otf') format('truetype');	
+	font-family: 'champagnelimousines';
+	src: url('../font/ChampagneLimousines.ttf') format('truetype');	
 	font-weight: normal;
 	font-style: normal;
 }
@@ -81,10 +81,9 @@ nav
 
 #home_block
 {
-	height: 100%;
-	width: 100%;
-	display: flex;
+	display : flex;
 	flex-direction: column;
+	justify-content: space-between;
 	color: #FFFFFF;
 	font-family: var(--police-brand);
 }
@@ -132,8 +131,8 @@ nav
 
 .carousel_image
 {
-	height: 95%;
-	width: auto;
+	height: auto;
+	width: 95%;
 }
 
 .carousel-control-next, .carousel-control-prev /* fleches du carousel couleur noire */
@@ -250,3 +249,15 @@ footer a, footer a:hover
     }
 }
 
+/*--------------------------------------------------------------------------------------*/
+/* Format smartphone */
+@media(max-width: 767px)
+{
+	#home_title {
+		font-size: calc((var(--font-size-home-title)) * 0.5);
+	}
+	#home_subtitle	
+	{	
+		font-size: calc((var(--font-size-home-subtitle)) * 0.5);
+	}	
+}

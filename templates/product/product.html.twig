@@ -8,7 +8,7 @@
     <div class="container-fluid" id="products_block">
         {% for product in products %}
         <article>
-            <div class="content">
+            <div class="content mx-0 mx-lg-3">
                 <div class="row product_row py-1">
                     <div class="col-12">
                     <a  href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}"
@@ -28,8 +28,11 @@
                         </a>
                         <div>{{ product.region }}</div>
                         <div>{{ product.volume }}L</div>
-                        <div>{{ product.price }}EUR</div>
-
+                        {% if product.type == "red_wine" or product.type == "white_wine" or product.type == "rose_wine" or product.type == "champagne" %}
+                            <div><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;(6 bouteilles)</div>
+                        {% else %}
+                            <div><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;</div>
+                        {% endif %}
                         <div>
                             <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info">Fiche produit</a>
                             <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary">
