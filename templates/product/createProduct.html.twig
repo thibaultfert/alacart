@@ -7,7 +7,7 @@
 {% block body %}
 
     {% if app.user %}
-        {% if app.user.email == "thibaultfert@gmail.com" %}
+        {% if app.user.email == "thibaultfert@gmail.com" or app.user.email == "patrice.fert.abcd@gmail.com" %}
             <div class="container-fluid min-content-height">
                 <h1>
                     {% if editMode %}
@@ -46,9 +46,10 @@
                     <div class="col-12">
                         {{ form_row(formProduct.type, {'label': 'Type'}) }}
                     </div>
+                    {{ form_rest(formProduct) }} {# render les champs cachés (sans cet instriction, fail "CSRF token is invalid"#}
                     <br/>
                     <div class="col">
-                        <button type="submit" class="btn btn-success">
+                        <button class="btn btn-success">
                             {% if editMode %}
                                 Enregistrer
                             {% else %}
@@ -57,6 +58,7 @@
                         </button>            
                     </div>
                 </div
+                
                 {{ form_end(formProduct) }} {# balise fermante précédée de toute les champs présent dans le form et non appelé (comportement par défaut) #}
             </div>
             

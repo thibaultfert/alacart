@@ -51,13 +51,28 @@
                 <div style="font-style: italic">"{{ product.description }}"</div>
                 <div>{{ product.volume }}L</div>
                 <div class="row">
-                    <div class="col-6 d-flex align-items-end">{{ product.price }}EUR</div>
+                    {% if product.type == "red_wine" or product.type == "white_wine" or product.type == "rose_wine" or product.type == "champagne" %}
+                        <div class="col-6"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;(6 bouteilles)</div>
+                    {% else %}
+                        <div class="col-6"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;</div>
+                    {% endif %}
                     <div class="col-6">
-                        <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary">
-                        Ajouter à mon panier
+                        <a href="{{ path('cart_add', { 'id' : product.id }) }}" class="btn btn-primary">
+                            Ajouter à mon panier
                         </a>
-                    </div>     
+                    </div>
                 </div>
+                 {% if app.user.email == "thibaultfert@gmail.com" or app.user.email == "patrice.fert.abcd@gmail.com" %}
+                    <div class="row border border-danger py-1">
+                        <div class="col-6">
+                            <a href="{{ path('product_edit', {'id' : product.id}) }}" class="btn btn-info">Modifier le produit</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="{{ path('product_delete', {'id' : product.id }) }}" class="btn btn-danger">Supprimer le produit</a>
+                        </div>
+                    </div> 
+                {% endif %} 
+               
             </div>
         </div>
     </div>

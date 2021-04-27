@@ -37,21 +37,36 @@ class ProductController extends AbstractController
         $form->handleRequest($request); // L'objet form dispose d'un gestionnaire de requete
                                         // Analyse si soumis ou pas, si les champs sont remplis etc... 
                                         // Puis bind l'ensemble des champs dans l'objet associé (ici product)
-        
+
         if($form->isSubmitted() && $form->isValid()) {
             $manager->persist($product);
             $manager->flush();
-
+            $this->addFlash('success','L\'article a bien été édité');
             return $this->redirectToRoute('product_show_one', [
                 'id' => $product->getId(),
                 'type' => $product->getType()
                 ]);
-        }
-                                        
+        }                               
         return $this->render('product/createProduct.html.twig', [
             'formProduct' => $form->createView(),
             'editMode' => $product->getId() !== null  // true si l'objet existe déjà (dans ce cas on veut éditer et non pas créer)
         ]);
+    }
+
+    /**
+     * @Route("/product/{id}/delete", name="product_delete")
+     */
+    public function deleteOneProduct($id, ProductService $productService, EntityManagerInterface $manager)
+    {
+        $product = $productService->getOneItemById($id);
+        $type = $product->getType();
+        $manager->remove($product);
+        $manager->flush();
+        $this->addFlash('success','L\'article a bien été supprimé');
+        return $this->render('product/product.html.twig', [
+            'products' => $productService->getAllItemsByType($type),
+            'pageTitle' => $productService->getProductPageTitle($type)
+        ]);                              
     }
  
     /**
