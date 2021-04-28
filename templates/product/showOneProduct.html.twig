@@ -4,14 +4,14 @@
 
 {% block body %}
     <div class="container-fluid min-content-height">
-        <div class="row h-100">
-            <div class="col-12 d-flex align-items-center" style="height:10%">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
                 <h2>{{ product.name }}</h2>
             </div>
-            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center border border-dark rounded" style="height:90%">
+            <div class="col-12 col-lg-5 d-flex justify-content-center align-items-center border border-dark px-0" style="height:90%">
                 {% if product.numberOfImages is not null %}        
                     <div id="carouselControls" class="carousel slide h-100 w-100 mx-auto" data-ride="carousel" data-interval="false">
-                        <ol class="carousel-indicators bg-dark mb-0 mx-auto w-100">
+                        <ol class="carousel-indicators bg-dark mb-0 mx-0 w-100">
                             {% for i in 0..(product.numberOfImages - 1) %} {# On boulce de 0 à (nbImage - 1) car le data-slide-to doit commencer à 0 #}
                                 {% if i == 0 %} {# cas particulier : le premier lien doit avoir la class 'active'#}
                                     <li data-target="#carouselControls" data-slide-to="{{ i }}" class="active"></li>
@@ -24,11 +24,17 @@
                             {% for i in 1..(product.numberOfImages) %} 
                                 {% if i == 1 %} {# cas particulier : le premier carousel-item doit avoir la class 'active'#}
                                     <div class="carousel-item active h-100">
-                                        <img src="{{ asset('images/product/' ~ product.type ~ '/big-size/' ~ product.images ~ '.jpg') }}" class="img-fluid d-block carousel_image mx-auto" alt="photo_produit">
+                                        <img    src="{{ asset('images/product/' ~ product.type ~ '/big-size/' ~ product.images ~ '.jpg') }}" 
+                                                class="img-fluid d-block carousel_image mx-auto" 
+                                                alt="photo_produit"
+                                                onerror="this.src='{{ asset('images/coming_soon.jpg') }}';">
                                     </div>                                    
                                 {% else %}
                                     <div class="carousel-item h-100">
-                                        <img src="{{ asset('images/product/' ~ product.type ~ '/big-size/' ~ product.images ~ '-' ~ i ~ '.jpg') }}" class="img-fluid d-block carousel_image mx-auto" alt="photo_produit">
+                                        <img    src="{{ asset('images/product/' ~ product.type ~ '/big-size/' ~ product.images ~ '-' ~ i ~ '.jpg') }}" 
+                                                class="img-fluid d-block carousel_image mx-auto" 
+                                                alt="photo_produit"
+                                                onerror="this.src='{{ asset('images/coming_soon.jpg') }}';">
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -46,24 +52,33 @@
                     <div class="container-fluid text-center">Pas encore d'images pour ce produit</div>
                 {% endif %}
             </div> 
-            <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-around">
-                <div>{{ product.region }}</div>
-                <div style="font-style: italic">"{{ product.description }}"</div>
-                <div>{{ product.volume }}L</div>
-                <div class="row">
+            <div class="col-12 col-lg-7 d-flex flex-column justify-content-around">
+                {% if product.region|length %}
+                    <div class="my-1">{{ product.region }}</div>
+                {% endif %}
+                {% if product.description|length %}
+                    <div class="my-1" style="font-style: italic">"{{ product.description }}"</div>
+                {% endif %}
+                {% if product.volume|length %}
+                    <div class="my-1">{{ product.volume }}L</div>
+                {% endif %}
+                {% if product.weight|length %}
+                    <div class="my-1">{{ product.weight }}kg</div>
+                {% endif %}
+                <div class="row my-1">
                     {% if product.type == "red_wine" or product.type == "white_wine" or product.type == "rose_wine" or product.type == "champagne" %}
-                        <div class="col-6"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;(6 bouteilles)</div>
+                        <div class="col-12 col-sm-6 my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;(6 bouteilles)</div>
                     {% else %}
-                        <div class="col-6"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;</div>
+                        <div class="col-12 col-sm-6 my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;</div>
                     {% endif %}
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6 my-1">
                         <a href="{{ path('cart_add', { 'id' : product.id }) }}" class="btn btn-primary">
                             Ajouter à mon panier
                         </a>
                     </div>
                 </div>
                  {% if app.user.email == "thibaultfert@gmail.com" or app.user.email == "patrice.fert.abcd@gmail.com" %}
-                    <div class="row border border-danger py-1">
+                    <div class="row border border-danger py-1 my-1">
                         <div class="col-6">
                             <a href="{{ path('product_edit', {'id' : product.id}) }}" class="btn btn-info">Modifier le produit</a>
                         </div>
@@ -71,51 +86,37 @@
                             <a href="{{ path('product_delete', {'id' : product.id }) }}" class="btn btn-danger">Supprimer le produit</a>
                         </div>
                     </div> 
-                {% endif %} 
-               
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 d-lg-none my-2">
-                <div class="my-1">{{ product.region }}</div>
-                <div class="my-1" style="font-style: italic">"{{ product.description }}"</div>
-                <div class="my-1">{{ product.volume }}L</div>
-                <div class="row my-1">
-                    <div class="col-6 d-flex align-items-end"><strong>{{ product.price }}EUR</strong></div>
-                    <div class="col-6">
-                        <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary">
-                        Ajouter à mon panier
-                        </a>
-                    </div>     
-                </div>
+                {% endif %}               
             </div>
         </div>
     </div>
     <div class="container-fluid border-top border-dark my-2">
         <div class="row">
             <div class="col-12 my-2">
-                <h1>Commentaires :</h1>
-                {% for productComment in product.productComments %}
-                    <div class="comment">
-                        <div class="row">
-                            <div class="col-3">
-                                {{ productComment.author }} (<small>{{ productComment.createdAt | date ('d/m/Y à H:i') }}</small>)
-                            </div> 
-                            <div class="col-9">
-                                {{ productComment.content }}
+                {% if product.productComments|length %}
+                    <h1>Commentaires :</h1>
+                    {% for productComment in product.productComments %}
+                        <div class="comment">
+                            <div class="row">
+                                <div class="col-3">
+                                    {{ productComment.author }} (<small>{{ productComment.createdAt | date ('d/m/Y à H:i') }}</small>)
+                                </div> 
+                                <div class="col-9">
+                                    {{ productComment.content }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                {% endfor %}
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    <div class="row">Pas encore de commentaires pour ce produit</div>
+                {% endif %}                
             </div>
         </div>
         <div class="row">
             <div class="col-12 my-2">
                 {% if app.user %}
-                    <h1>Ajouter un commentaire</h1>
+                    <h3>Ajouter un commentaire</h3>
                     {{ form_start(productCommentForm, {'action': path('product_add_comment', { 'id' : product.id, 'type' : product.type, 'userId' : app.user.id })}) }}
                     {{ form_row(productCommentForm.content, {'label': 'Commentaire'})}}
                     <button class="btn btn-success">Envoyer</button>

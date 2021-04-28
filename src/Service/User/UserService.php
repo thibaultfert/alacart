@@ -20,6 +20,13 @@ class UserService {
         return $user; 
     }
 
+    public function getOneItemByEmail(string $email)
+    {
+        $user = $this->userRepository->findOneBy(["email" => $email]);
+
+        return $user; 
+    }
+
     public function getOneItemByToken(string $token)
     {
         $user = $this->userRepository->findOneBy(["token" => $token]);

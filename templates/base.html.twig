@@ -24,7 +24,18 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-xl navbar-light d-flex align-items-center bg-light fixed-top">
+        {# On vérifie tout d'abord que si un user est connecté, son compte est bien activé #}
+        {# Si un user avec un compte non activé se connecte, il est automatiquent déconnecté #}
+        {% if app.user %}
+            {% if app.user.enable != 1 %}
+                <script type="text/javascript">
+                    alert("Votre compte n'est pas encore activé, le lien d'activation se trouve dans le mail de confirmation qui vous a été envoyé."); 
+                    window.location = '{{ path('security_logout', {'userNotEnabled': true }) }}';        
+                </script>
+            {% endif %}
+        {% endif %}
+        {# Bloc de navigation top #}
+        <nav class="navbar navbar-expand-xl d-flex align-items-center bg-light fixed-top text-dark">
             <a class="navbar-brand d-flex" href="{{ path('main_home') }}">
                 <div id="logo_text" class="d-flex align-items-center justify-content-center">Alacart'</div>
                 <div class="d-flex align-items-center justify-content-center"><img class="img-fluid" src="{{ asset('images/logos/brand_logo.png') }}" alt="logo" style="max-height: 50px;"></div>

@@ -12,30 +12,40 @@
                 <div class="row product_row py-1">
                     <div class="col-12">
                     <a  href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}"
-                        class="d-block d-sm-none">
+                        class="d-block d-sm-none my-1">
                         <h2>{{ product.name }}</h2>
                     </a>
                     </div>
                     <div class="col-12 col-sm-3 d-flex align-items-center justify-content-center">
                         <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}">
-                            <img class="img-fluid" src="{{ asset('images/product/' ~ product.type ~ '/'  ~ product.images ~ '.jpg') }}" alt="product_photo">
+                            <img    class="img-fluid" 
+                                    src="{{ asset('images/product/' ~ product.type ~ '/'  ~ product.images ~ '.jpg') }}" 
+                                    alt="product_photo"
+                                    onerror="this.src='{{ asset('images/coming_soon.jpg') }}';">
                         </a>
                     </div>
                     <div class="col-12 col-sm-9 d-flex flex-column justify-content-around">
                         <a  href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}"
-                            class="d-none d-sm-block">
+                            class="d-none d-sm-block my-1">
                             <h2>{{ product.name }}</h2>
                         </a>
-                        <div>{{ product.region }}</div>
-                        <div>{{ product.volume }}L</div>
+                        {% if product.region|length %}
+                            <div class="my-1">{{ product.region }}</div>
+                        {% endif %}
+                        {% if product.volume|length %}
+                            <div class="my-1">{{ product.volume }}L</div>
+                        {% endif %}
+                        {% if product.weight|length %}
+                            <div class="my-1">{{ product.weight }}kg</div>
+                        {% endif %}
                         {% if product.type == "red_wine" or product.type == "white_wine" or product.type == "rose_wine" or product.type == "champagne" %}
-                            <div><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;(6 bouteilles)</div>
+                            <div class="my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;(6 bouteilles)</div>
                         {% else %}
-                            <div><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;</div>
+                            <div class="my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;</div>
                         {% endif %}
                         <div>
-                            <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info">Fiche produit</a>
-                            <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary">
+                            <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info my-1">Fiche produit</a>
+                            <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary my-1">
                                 Ajouter à mon panier
                             </a>
                         </div>

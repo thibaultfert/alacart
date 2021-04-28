@@ -59,7 +59,7 @@ class SecurityController extends AbstractController
             $user->setEnable(true);
             $manager->persist($user);
             $manager->flush();
-            $this->addFlash('success','Votre compte a bient été crée !');
+            $this->addFlash('success','Votre compte a bien été crée !');
             return $this->redirectToRoute('security_login'); 
         } 
         else 

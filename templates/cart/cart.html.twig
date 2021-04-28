@@ -54,26 +54,28 @@
 
             <div class="content">
                 <div class="row">
-                    {% if wineBoxQuantity >= 10 %}
-                        {% if app.user %}
+                    {% if app.user %}
+                        {% if wineBoxQuantity >= 10 %}
                             <div class="col-12 col-md-4">
                                 <a href="{{ path('cart_send', {'id': app.user.id }) }}" class="btn btn-success btn-block active">Envoyer ma liste</a>
                             </div>
                         {% else %}
                             <div class="col-12 col-md-4">
-                                <a href="{{ path('security_login')}}" class="btn btn-success btn-block active">Envoyer ma liste</a>
+                                <button class="btn btn-success btn-block disabled">Envoyer ma liste</button>
                             </div>
+                            <div class="col-12 col-md-8">(votre commande doit contenir 60 bouteilles pour être éligible à la livraison) </div>
                         {% endif %}
                     {% else %}
+                        <h4 class="my-2">Pour envoyer votre liste, merci de vous connecter</h4>
                         <div class="col-12 col-md-4">
-                            <button class="btn btn-success btn-block disabled">Envoyer ma liste</button>
+                            <a href="{{ path('security_login') }}" class="btn btn-secondary btn-block active">Se connecter</a>
                         </div>
-                        <div class="col-12 col-md-8">(votre commande doit contenir 60 bouteilles pour être éligible à la livraison) </div>
                     {% endif %}
                 </div>
             </div>
             <div class="content">
-                <div class="row">
+                <div class="row p-1 border border-info">
+                    <div class="col-12"><strong>Information :</strong></div>
                     <div class="col-12">Après confirmation, cette liste nous sera envoyée et nous vous recontacterons pour finaliser la commande et organiser la livraison.</div>
                 </div>
             </div>

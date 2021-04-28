@@ -172,6 +172,12 @@ footer
 	height: min-content;
 }
 
+.active_link:hover
+{
+	text-decoration: underline;
+	font-weight: bold;
+}
+
 a, a:hover
 {
 	color: black;
@@ -192,10 +198,12 @@ footer a, footer a:hover
 	position: relative;
 	color: #000000;
 	text-decoration: none;
+	transition: all 0.3s ease-in-out 0s;
 }
 
 .nav-item:hover {
-	color: #000000;
+	color: #2c1338;
+	background-color: rgba(169, 86, 128, 0.1);
 }
 
 .nav-item::before {
