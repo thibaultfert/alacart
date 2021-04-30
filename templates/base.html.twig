@@ -95,7 +95,7 @@
             </div>
         </nav>
 
-        <div class="container-fluid" id="central_block">
+        <div id="central_block">
             {% for label, messages in app.flashes(['success', 'warning']) %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }}" style="font-family: sans-serif; font-size: 0.8em;">
@@ -106,7 +106,7 @@
 
             {% block body %}
             {% endblock %}  
-         
+            
             <footer class="row-fluid bg-dark text-center">
                 <!-- Grid container -->
                 <div class="container p-4">
@@ -203,8 +203,8 @@
                 </div>
                 <!-- Copyright -->
             </footer>
+        </div> 
         
-        </div>
         <script src="{{ asset('js/backgroundImage.js') }}"></script>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

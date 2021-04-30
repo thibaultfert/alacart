@@ -38,7 +38,8 @@ class ContactService {
     {
         $email = (new TemplatedEmail())
                         ->from($contact->getEmail())
-                        ->to(new Address("thibaultfertdev@gmail.com"))
+                        ->to(new Address("alacart.distribution@gmail.com"))
+                        ->cc("thibaultfertdev@gmail.com")
                         ->subject('Email de contact venant du site Alacart.fr')
                         // path of the Twig template to render
                         ->htmlTemplate('email/simpleContactEmail.html.twig')
@@ -53,7 +54,8 @@ class ContactService {
     {
         $email = (new TemplatedEmail())
                         ->from($contact->getEmail())
-                        ->to(new Address("thibaultfertdev@gmail.com"))
+                        ->to(new Address("alacart.distribution@gmail.com"))
+                        ->cc("thibaultfertdev@gmail.com")
                         ->subject('Commande passée sur le site Alacart.fr')
                         // path of the Twig template to render
                         ->htmlTemplate('email/cartEmail.html.twig')
