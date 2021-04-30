@@ -27,6 +27,13 @@ class ProductService {
         return $products;
     }
 
+    public function getAllItemsByTypeOrderByPriceAsc(string $productType) : array
+    {
+        $products = $this->productRepository->findByTypeOrderByPriceAsc($productType);
+
+        return $products;
+    }
+
     public function getProductPageTitle(string $productType) : string
     {       
         switch ($productType) {

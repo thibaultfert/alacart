@@ -75,7 +75,7 @@ class ProductController extends AbstractController
     public function productShowByType($type, ProductService $productService): Response
     {
         return $this->render('product/product.html.twig', [
-            'products' => $productService->getAllItemsByType($type),
+            'products' => $productService->getAllItemsByTypeOrderByPriceAsc($type),
             'pageTitle' => $productService->getProductPageTitle($type)
         ]);
     }
