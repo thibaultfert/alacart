@@ -85,6 +85,11 @@ class Product
      */
     private $productComments;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $priceInfo;
+
     public function __construct()
     {
         $this->productComments = new ArrayCollection();
@@ -229,6 +234,18 @@ class Product
                 $productComment->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPriceInfo(): ?string
+    {
+        return $this->priceInfo;
+    }
+
+    public function setPriceInfo(?string $priceInfo): self
+    {
+        $this->priceInfo = $priceInfo;
 
         return $this;
     }

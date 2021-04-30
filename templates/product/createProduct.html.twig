@@ -44,6 +44,9 @@
                         {{ form_row(formProduct.price, {'label': 'Prix'}) }}            
                     </div>
                     <div class="col-12">
+                        {{ form_row(formProduct.priceInfo, {'label': 'Info Prix'}) }}
+                    </div>
+                    <div class="col-12">
                         {{ form_row(formProduct.type, {'label': 'Type'}) }}
                     </div>
                     {{ form_rest(formProduct) }} {# render les champs cachés (sans cet instriction, fail "CSRF token is invalid"#}

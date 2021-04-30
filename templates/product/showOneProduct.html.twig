@@ -66,11 +66,7 @@
                     <div class="my-1">{{ product.weight }}kg</div>
                 {% endif %}
                 <div class="row my-1">
-                    {% if product.type == "red_wine" or product.type == "white_wine" or product.type == "rose_wine" or product.type == "champagne" %}
-                        <div class="col-12 col-sm-6 my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;(6 bouteilles)</div>
-                    {% else %}
-                        <div class="col-12 col-sm-6 my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;</div>
-                    {% endif %}
+                    <div class="col-12 col-sm-6 my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;{{ product.priceInfo }}</div>
                     <div class="col-12 col-sm-6 my-1">
                         <a href="{{ path('cart_add', { 'id' : product.id }) }}" class="btn btn-primary">
                             Ajouter à mon panier

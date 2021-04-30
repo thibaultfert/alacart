@@ -21,6 +21,15 @@ class ProductType extends AbstractType
             ->add('volume')
             ->add('weight')
             ->add('price')
+            ->add('priceInfo', ChoiceType::class, [
+                'placeholder' => 'Choisir une info prix',
+                'choices' => [
+                    '(6 bouteilles)' => '(6 bouteilles)',
+                    '(caisse bois 6 bouteilles)' => '(caisse bois 6 bouteilles)',
+                    '/ kg' => '/ kg',
+                    '/ l\'unité' => '/ l\'unité'
+                ]
+            ])
             ->add('type', ChoiceType::class, [
                 'placeholder' => 'Choisir un type',
                 'choices' => [
