@@ -73,16 +73,18 @@
                         </a>
                     </div>
                 </div>
-                 {% if app.user.email == "thibaultfert@gmail.com" or app.user.email == "patrice.fert.abcd@gmail.com" %}
-                    <div class="row border border-danger py-1 my-1">
-                        <div class="col-6">
-                            <a href="{{ path('product_edit', {'id' : product.id}) }}" class="btn btn-info">Modifier le produit</a>
-                        </div>
-                        <div class="col-6">
-                            <a href="{{ path('product_delete', {'id' : product.id }) }}" class="btn btn-danger">Supprimer le produit</a>
-                        </div>
-                    </div> 
-                {% endif %}               
+                {% if app.user %}
+                    {% if app.user.email == "thibaultfert@gmail.com" or app.user.email == "patrice.fert.abcd@gmail.com" %}
+                        <div class="row border border-danger py-1 my-1">
+                            <div class="col-6">
+                                <a href="{{ path('product_edit', {'id' : product.id}) }}" class="btn btn-info">Modifier le produit</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="{{ path('product_delete', {'id' : product.id }) }}" class="btn btn-danger">Supprimer le produit</a>
+                            </div>
+                        </div> 
+                    {% endif %}     
+                {% endif %}           
             </div>
         </div>
     </div>
@@ -105,7 +107,9 @@
                         <hr>
                     {% endfor %}
                 {% else %}
-                    <div class="row">Pas encore de commentaires pour ce produit</div>
+                    <div class="row">
+                        <div class="col-12">Pas encore de commentaires pour ce produit</div>
+                    </div>
                 {% endif %}                
             </div>
         </div>

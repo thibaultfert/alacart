@@ -36,5 +36,4 @@ switch (titleContent){
     break;  
     default:
     centralBlocElt.style.backgroundImage = "none";
-    console.error('Aucun marque page reconnu');
 }
