@@ -26,9 +26,9 @@
                                     <td>{{ item.product.name }}</td>
                                     <td>{{ item.product.price }}</td>
                                     <td class="d-flex"> 
-                                        <a href="{{ path('cart_add', {'id': item.product.id }) }}" class="btn btn-outline-primary btn-sm">+</a>
-                                        &nbsp;{{ item.quantity }}&nbsp;
                                         <a href="{{ path('cart_remove', {'id': item.product.id }) }}" class="btn btn-outline-secondary btn-sm">-</a>
+                                        &nbsp;{{ item.quantity }}&nbsp;
+                                        <a href="{{ path('cart_add', {'id': item.product.id }) }}" class="btn btn-outline-primary btn-sm">+</a>
                                     </td>
                                     <td>{{ item.product.price * item.quantity }}                             </td>
                                     <td>

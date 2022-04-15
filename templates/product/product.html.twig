@@ -38,7 +38,7 @@
                         {% if product.weight|length %}
                             <div class="my-1">{{ product.weight }}kg</div>
                         {% endif %}
-                        <div class="my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;{{ product.priceInfo }}</div>
+                        <div class="my-1"><strong>{{ product.price|number_format(2) }}&nbsp;EUR</strong>&nbsp;(H.T)&nbsp;{{ product.priceInfo }}</div>
                         <div>
                             <a href="{{ path('product_show_one', {'id' : product.id, 'type' : product.type }) }}" class="btn btn-info my-1">Fiche produit</a>
                             <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-primary my-1">
